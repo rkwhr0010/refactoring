@@ -1,5 +1,0 @@
-{
-    "hamlet":{"name" : "Hamlet", "ty[e" : "tragedy"},
-    "as-like" : {"name":"As You Like It", "type" : "comdy"},
-    "othello":{"name":"Othello", "type":"tragedy"}
-}
