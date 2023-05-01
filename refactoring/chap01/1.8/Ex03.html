@@ -57,13 +57,19 @@ function usd(aNumber){
 
 
 //createStatementData.js 별도 파일이라 가정
+
+
 class PerformanceCalculator{
-    constructor(aPerformance){
+    constructor(aPerformance, aPlay){
         this.performance = aPerformance;
+        this.play = aPlay;
     }
 }
+
 console.log(statement(invoices,plays));
 document.write(htmlStatement(invoices,plays));
+
+
 
 function createStatementData(invoice, plays) {
     const statementData = {};
@@ -74,9 +80,9 @@ function createStatementData(invoice, plays) {
     return statementData; 
 
     function enrichPerformance(aPerformance){
-        const calculator = new PerformanceCalculator(aPerformance); //공연료 계산기 생성
+        const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance)); //공연 정보를 계산기로 전달
         const result = Object.assign({}, aPerformance);
-        result.play = playFor(result);
+        result.play = calculator.play;
         result.amount = amountFor(result);
         result.volumeCredits = volumeCreditsFor(result);
 
