@@ -14,13 +14,16 @@
 <script>
 
 function statement(invoice, plays) {
-    const statementData = {};
-    statementData.customer = invoice.customer;
-    statementData.performances = invoice.performances.map(enrichPerformance);
-    statementData.totalAmount = totalAmount(statementData);
-    statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-    return renderPlainText(statementData,  plays) 
+    return renderPlainText(createStatementData(invoice, plays));
 
+    function createStatementData(invoice, plays) {
+        const statementData = {};
+        statementData.customer = invoice.customer;
+        statementData.performances = invoice.performances.map(enrichPerformance);
+        statementData.totalAmount = totalAmount(statementData);
+        statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+        return statementData; 
+    }
     function enrichPerformance(aPerformance){
         const result = Object.assign({}, aPerformance);
         result.play = playFor(result);//중간 데이터에 연극 정보를 저장
@@ -62,7 +65,7 @@ function statement(invoice, plays) {
     }
     function totalAmount(data){ 
         return data.performances //반복문을 파이프라인으로 바꿈
-            .reduce((total, p) => total + p.amount, 0 );
+            .reduce((total, p) => total + p.volumeCredits, 0 );
     }
     function totalVolumeCredits(data){
         return data.performances //반복문을 파이프라인으로 바꿈

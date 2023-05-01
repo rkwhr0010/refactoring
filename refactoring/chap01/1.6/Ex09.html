@@ -12,24 +12,64 @@
 <script src="plays.json" type="text/javascript"></script>
 <script src="invoices.json" type="text/javascript"></script>
 <script>
+console.log(statement(invoices,plays));
+document.write(htmlStatement(invoices,plays));
 
 function statement(invoice, plays) {
+    return renderPlainText(createStatementData(invoice, plays));
+}
+function htmlStatement(invoice, plays){
+    return renderHtml(createStatementData(invoice,plays));
+    //중간데이터 생성 함수를 공유한다.
+}
+function renderHtml(data, plays) {
+    let result = `<h1>청구 내역 (고객명 : ${data.customer})</h1>\n`;
+    result += "<table>\n";
+    result += "<tr><th>연극</th><th>좌석 수</th><th>금액</th></tr>"
+    for(let perf of data.performances){
+        result += `<tr><td>${perf.play.name}</td><td>(${perf.audience}석)</td><td>${usd(perf.amount)}</td></tr>\n`;
+    }
+    result += "</table>\n";
+    result += `<p>총액: <em>${usd(data.totalAmount)}</em></p>\n`; 
+    result += `<p>적립 포인트: <em>${data.totalVolumeCredits}</em>점</p>\n`;
+    return result;
+}
+
+function renderPlainText(data, plays) {
+    let result = `청구 내역 (고객명 : ${data.customer})\n`;
+    for(let perf of data.performances){
+        result += `${perf.play.name} : ${usd(perf.amount)} (${perf.audience}석)\n`;
+    }
+    result += `총액: ${usd(data.totalAmount)}\n`; 
+    result += `적립 포인트: ${data.totalVolumeCredits}점\n`;
+    return result;
+}
+
+function usd(aNumber){
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+    }).format(aNumber/100); 
+}
+
+//createStatementData.js 별도 파일이라 가정
+function createStatementData(invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
     statementData.performances = invoice.performances.map(enrichPerformance);
     statementData.totalAmount = totalAmount(statementData);
     statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-    return renderPlainText(statementData,  plays) 
-
+    return statementData; 
     function enrichPerformance(aPerformance){
         const result = Object.assign({}, aPerformance);
-        result.play = playFor(result);//중간 데이터에 연극 정보를 저장
+        result.play = playFor(result);
         result.amount = amountFor(result);
         result.volumeCredits = volumeCreditsFor(result);
 
         return result;
     }
-    function playFor(aPerformance){ //renderPlainText 중첩함수를 옮김
+    function playFor(aPerformance){ 
         return plays[aPerformance.playID];
     }
     
@@ -61,35 +101,14 @@ function statement(invoice, plays) {
         return volumeCredits;
     }
     function totalAmount(data){ 
-        return data.performances //반복문을 파이프라인으로 바꿈
+        return data.performances 
             .reduce((total, p) => total + p.amount, 0 );
     }
     function totalVolumeCredits(data){
-        return data.performances //반복문을 파이프라인으로 바꿈
+        return data.performances 
             .reduce((total, p)=>total+p.volumeCredits, 0);
     }
 }
-
-function renderPlainText(data, plays) {
-    let result = `청구 내역 (고객명 : ${data.customer})\n`;
-    for(let perf of data.performances){
-        result += `${perf.play.name} : ${usd(perf.amount)} (${perf.audience}석)\n`;
-    }
-    result += `총액: ${usd(data.totalAmount)}\n`; 
-    result += `적립 포인트: ${data.totalVolumeCredits}점\n`;
-    return result;
-
-    function usd(aNumber){
-        return new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 2
-        }).format(aNumber/100); 
-    }
-
-}
-
-console.log(statement(invoices,plays));
 </script>
 
 </body>

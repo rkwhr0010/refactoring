@@ -65,7 +65,7 @@ function statement(invoice, plays) {
     }
     function totalAmount(data){ 
         return data.performances //반복문을 파이프라인으로 바꿈
-            .reduce((total, p) => total + p.volumeCredits, 0 );
+            .reduce((total, p) => total + p.amount, 0 );
     }
     function totalVolumeCredits(data){
         return data.performances //반복문을 파이프라인으로 바꿈
