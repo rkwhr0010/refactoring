@@ -15,6 +15,8 @@
 console.log(statement(invoices,plays));
 document.write(htmlStatement(invoices,plays));
 
+
+
 //statement.js 파일이라 가정
 function statement(invoice, plays) {
     return renderPlainText(createStatementData(invoice, plays));
@@ -64,7 +66,9 @@ function createStatementData(invoice, plays) {
     statementData.totalAmount = totalAmount(statementData);
     statementData.totalVolumeCredits = totalVolumeCredits(statementData);
     return statementData; 
+
     function enrichPerformance(aPerformance){
+        const calculator = new PerformanceCalculator(aPerformance); //공연료 계산기 생성
         const result = Object.assign({}, aPerformance);
         result.play = playFor(result);
         result.amount = amountFor(result);
@@ -110,6 +114,11 @@ function createStatementData(invoice, plays) {
     function totalVolumeCredits(data){
         return data.performances 
             .reduce((total, p)=>total+p.volumeCredits, 0);
+    }
+}
+class PerformanceCalculator{
+    constructor(aPerformance){
+        this.performance = aPerformance;
     }
 }
 //createStatementData.js 별도 파일이라 가정 끝
