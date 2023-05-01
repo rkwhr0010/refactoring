@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<script src="plays.json" type="text/javascript"></script>
+<script src="invoices.json" type="text/javascript"></script>
+<script>
+
+
+
+//statement.js 파일이라 가정
+function statement(invoice, plays) {
+    return renderPlainText(createStatementData(invoice, plays));
+}
+function htmlStatement(invoice, plays){
+    return renderHtml(createStatementData(invoice,plays));
+    //중간데이터 생성 함수를 공유한다.
+}
+function renderHtml(data, plays) {
+    let result = `<h1>청구 내역 (고객명 : ${data.customer})</h1>\n`;
+    result += "<table>\n";
+    result += "<tr><th>연극</th><th>좌석 수</th><th>금액</th></tr>"
+    for(let perf of data.performances){
+        result += `<tr><td>${perf.play.name}</td><td>(${perf.audience}석)</td><td>${usd(perf.amount)}</td></tr>\n`;
+    }
+    result += "</table>\n";
+    result += `<p>총액: <em>${usd(data.totalAmount)}</em></p>\n`; 
+    result += `<p>적립 포인트: <em>${data.totalVolumeCredits}</em>점</p>\n`;
+    return result;
+}
+
+function renderPlainText(data, plays) {
+    let result = `청구 내역 (고객명 : ${data.customer})\n`;
+    for(let perf of data.performances){
+        result += `${perf.play.name} : ${usd(perf.amount)} (${perf.audience}석)\n`;
+    }
+    result += `총액: ${usd(data.totalAmount)}\n`; 
+    result += `적립 포인트: ${data.totalVolumeCredits}점\n`;
+    return result;
+}
+
+function usd(aNumber){
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+    }).format(aNumber/100); 
+}
+//statement.js 파일이라 가정 끝
+
+
+//createStatementData.js 별도 파일이라 가정
+
+
+class PerformanceCalculator{
+    constructor(aPerformance, aPlay){
+        this.performance = aPerformance;
+        this.play = aPlay;
+    }
+    get amount(){
+        let result = 0;
+        switch(this.play.type){
+            case "tragedy" : 
+            result = 40000;
+            if(this.performance.audience > 30){
+                result += 1000 * (this.performance.audience - 30);
+            }
+            break;
+            case "comedy" : 
+            result = 30000;
+            if(this.performance.audience > 30){
+                result += 10000 + 500 * (this.performance.audience - 20);
+            }
+            result += 300 * this.performance.audience;
+            break;
+            default: throw new Error(`알수 없는 장르: ${this.play.type}`);
+        }
+        return result; 
+    }
+    get volumeCredits(){
+        let result = 0;
+        result += Math.max(this.performance.audience -30,0);
+        if("comedy" === this.play.type) 
+        result += Math.floor(this.performance.audience/5);
+        return result;
+    }
+}
+
+function createPerformanceCalculator(aPerformance, aPlay){
+    return new PerformanceCalculator(aPerformance, aPlay);
+}
+
+function createStatementData(invoice, plays) {
+    const statementData = {};
+    statementData.customer = invoice.customer;
+    statementData.performances = invoice.performances.map(enrichPerformance);
+    statementData.totalAmount = totalAmount(statementData);
+    statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+    return statementData; 
+
+    function enrichPerformance(aPerformance){
+        const calculator = createPerformanceCalculator(aPerformance, 
+            playFor(aPerformance)); //생성자 대신 팩토리 함수 이용
+        const result = Object.assign({}, aPerformance);
+        result.play = calculator.play;
+        result.amount = calculator.amount;
+        result.volumeCredits = calculator.volumeCredits;
+
+        return result;
+    }
+    function playFor(aPerformance){ 
+        return plays[aPerformance.playID];
+    }
+    
+    function totalAmount(data){ 
+        return data.performances 
+            .reduce((total, p) => total + p.amount, 0 );
+    }
+    function totalVolumeCredits(data){
+        return data.performances 
+            .reduce((total, p)=>total+p.volumeCredits, 0);
+    }
+}
+
+//createStatementData.js 별도 파일이라 가정 끝
+
+console.log(statement(invoices,plays));
+document.write(htmlStatement(invoices,plays));
+</script>
+
+</body>
+
+</html>
