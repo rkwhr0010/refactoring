@@ -1,18 +1,18 @@
-//지역 변수를 사용할 때
+//지역 변수를의 값을 변경할 때
 function printOwing(invoice){
-    let outstanding = 0;
-
     printBanner();
-
-    //미해결 채무
-    for(const o of invoice.orders){
-        outstanding += o.amount;
-    }
-
+    const outstanding = calculateOutstanding(invoice);
+    
     recordDueDate(invoice);
-    //중첩 함수가 지원되지 않는 언어는 이렇게 넣어줘야 할 것
     printDetails(invoice, outstanding);
 
+    function calculateOutstanding(invoice){
+        let result = 0;
+        for(const o of invoice.orders){
+            result += o.amount;
+        }
+        return result;
+    }
     function recordDueDate(invoice) {
         const today = Clock.today;
         invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
