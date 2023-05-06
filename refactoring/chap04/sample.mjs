@@ -37,7 +37,7 @@ export class Province {
     
     //생산 부족분
     get shortfall(){
-        return this._demand - this.totalProduction;
+        return this._demand - this.totalProduction * 2; // 실패 테스트
     }
     //수익 계산
     get profit(){
