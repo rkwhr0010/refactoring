@@ -8,11 +8,9 @@ describe('province', function(){
     beforeEach(function(){
         asia = new Province(sampleProvinceData());
     })
-    
     it('shortfall',function(){
         expect(asia.shortfall).equal(5);
     })
-    //총 수익 계산
     it('profit', function(){
         expect(asia.profit).equal(230); 
     })
