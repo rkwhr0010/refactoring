@@ -9,22 +9,24 @@ function printOwing(invoice){
         outstanding += o.amount;
     }
 
-    //마감일
-    const today = Clock.today;
-    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate()+30);
-
+    recordDueDate(invoice);
     //중첩 함수가 지원되지 않는 언어는 이렇게 넣어줘야 할 것
     printDetails(invoice, outstanding);
 
+    function recordDueDate(invoice) {
+        const today = Clock.today;
+        invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+    }
     function printDetails(invoice, outstanding) {
         console.log(`고객명 : ${invoice.customer}`);
         console.log(`채무액 : ${outstanding}`);
         console.log(`마감일 : ${invoice.dueDate.toLocaleDateString()}`);
     }
-
     function printBanner() {
         console.log("******************");
         console.log("**** 고객 채무 ****");
         console.log("******************");
     }
 }
+
+
