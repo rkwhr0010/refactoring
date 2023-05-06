@@ -17,6 +17,9 @@ describe('province', function(){
     it('change production', function(){
         asia.producers[0].production = 20;
         expect(asia.shortfall).equal(-6);
+    })
+    it('change production2', function(){
+        asia.producers[0].production = 20;
         expect(asia.profit).equal(292);
     })
 })
