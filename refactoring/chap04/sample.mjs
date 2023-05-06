@@ -81,4 +81,3 @@ export class Producer {
         this._production = newProduction;
     }
 }
-console.log(new Province(sampleProvinceData()).profit)
