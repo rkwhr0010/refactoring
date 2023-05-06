@@ -44,7 +44,7 @@ export class Province {
         return this.demandValue - this.demandCost;
     }
     get demandValue(){
-        return this.satisfiedDemand * this.price*2;
+        return this.satisfiedDemand * this.price;
     }
     get satisfiedDemand(){
         return Math.min(this._demand, this.totalProduction);
