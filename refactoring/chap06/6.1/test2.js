@@ -1,4 +1,4 @@
-//유효범위를 벗어나는 변수가 없을 때
+//지역 변수를 사용할 때
 function printOwing(invoice){
     let outstanding = 0;
 
