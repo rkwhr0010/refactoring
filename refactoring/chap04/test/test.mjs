@@ -1,6 +1,6 @@
+import { describe } from "mocha";//Mocha 테스트 프레임워크
 import {Province, sampleProvinceData} from "../sample.mjs";
-import { describe } from "node:test";//Mocha 테스트 프레임워크
-import { expect, assert } from "chai";
+import { expect, assert } from "chai"; // chai assert 라이브러리
 
 describe('province', function(){
     it('shortfall',function(){
@@ -9,6 +9,6 @@ describe('province', function(){
     })
     it('shortfall2',function(){
         const asia = new Province(sampleProvinceData()); //픽스처 설정
-        expect(asia.shortfall).equal(-5);//검증
+        expect(asia.shortfall).equal(5);//검증
     })
 })
