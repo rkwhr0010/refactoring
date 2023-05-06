@@ -1,6 +1,6 @@
 import { describe } from "mocha";
 import {Province, sampleProvinceData} from "../sample.mjs";
-import { expect, assert } from "chai"; 
+import { expect} from "chai"; 
 
 describe('province', function(){
     it('shortfall',function(){
