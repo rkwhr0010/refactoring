@@ -5,6 +5,6 @@ function inNewEngland(aCustomer){
 function newFunction(stateCode) {
     return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
 }
-//호출부
-const newEnglanders = someCustomers.filter(c=>inNewEngland(c));
+//호출부 변경
+const newEnglanders = someCustomers.filter(c=>newFunction(c));
 
