@@ -1,7 +1,4 @@
+//매개변수 이름이 다른 경우도 별다를 건 없다.
 function rating(aDriver){
-    return moreThanFiveLateDeliveries(aDriver) ? 2 : 1;
-}
-//매개변수 이름이 다른 경우
-function moreThanFiveLateDeliveries(dvr){
-    return dvr.numberOfLateDeliveres > 5;
+    return (numberOfLateDeliveres > 5) ? 2 : 1;
 }
