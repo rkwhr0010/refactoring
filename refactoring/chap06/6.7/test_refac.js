@@ -1,9 +1,6 @@
-let tpHd = "untitled";
+let 이제변수이름바꿔도됨 = "untitled";
 result += `<h1>${title()}</h1>`;
 obj['articleTitle'] = 'Hello World';
 setTitle(obj['articleTitle']);
-
-//게터
-function title(){ return tpHd;}
-//세터
-function setTitle(arg){tpHd = arg;}
+function title(){ return 이제변수이름바꿔도됨;}
+function setTitle(arg){이제변수이름바꿔도됨 = arg;}
