@@ -1,15 +1,16 @@
 //측정값
 let reading={customer : "ivan", quantity:10, month:5, uear:2017};
 //클라이언트1
-const aReading = acquireReading();
-const baseCharge = baseRate(aReading.month, aReading.year) * aReading.quantity;
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+const baseCharge = aReading.baseRate;
 //클라이언트2
 const aReading2 = acquireReading();
 const baseCharge2 = baseRate(aReading2.month, aReading2.year) * aReading2.quantity;
 const taxableCharge2 = Math.max(0,base-taxTreshold(aReading2.year));
 //클라이언트3
-const rawReading = acquireReading();
-const aReading3 = new Reading(rawReading);
+const rawReading3 = acquireReading();
+const aReading3 = new Reading(rawReading3);
 const basicChargeAmount = aReading3.baseCharge;
 
 class Reading{
