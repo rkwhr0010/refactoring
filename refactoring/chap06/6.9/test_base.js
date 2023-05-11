@@ -5,9 +5,9 @@ const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
 const baseCharge = aReading.baseRate;
 //클라이언트2
-const aReading2 = acquireReading();
-const baseCharge2 = baseRate(aReading2.month, aReading2.year) * aReading2.quantity;
-const taxableCharge2 = Math.max(0,base-taxTreshold(aReading2.year));
+const rawReading2 = acquireReading();
+const aReading2 = new Reading(rawReading);
+const taxableCharge2 = Math.max(0,aReading2.baseRate-taxTreshold(aReading2.year));
 //클라이언트3
 const rawReading3 = acquireReading();
 const aReading3 = new Reading(rawReading3);
