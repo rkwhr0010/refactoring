@@ -8,8 +8,12 @@ const station = {
         {temp:51, time: "2016-11-10 09:50"},
     ]
 };
-
+//정상 범위를 벗어난 측정값 탐색
 function readingsOutsideRange(station, min, max){
     return station.readings
         .filter(r => r.temp < min || r.temp > max);
 }
+//호출
+let alerts = readingsOutsideRange(station, 
+     operationPlan.temperatureFloor,
+    operationPlan.temperatureCeiling);
