@@ -9,16 +9,17 @@ const station = {
     ]
 };
 //새로운 데이터 구조 매개변수 추가
-function readingsOutsideRange(station, min, max, range){
+function readingsOutsideRange(station, min, /*max,*/ range){
     return station.readings
-        .filter(r => r.temp < min || r.temp > max);
+        .filter(r => r.temp < min || r.temp > range.max);
 }
+const range = new NumberRange(operationPlan.temperatureFloor,
+                             operationPlan.temperatureCeiling);
 let alerts = readingsOutsideRange(station, 
      operationPlan.temperatureFloor,
-    operationPlan.temperatureCeiling
-    ,null);
+    // operationPlan.temperatureCeiling,
+    range);
 
-//묶을 클래스
 class NumberRange{
     constructor(min,max){
         this._data = {min:min, max:max};
