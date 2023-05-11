@@ -15,10 +15,12 @@ function readingsOutsideRange(station, range){
 const range = new NumberRange(operationPlan.temperatureFloor,
                              operationPlan.temperatureCeiling);
 let alerts = readingsOutsideRange(station, range);
+//연관된 데이터를 묶음으로서 새로운 설계의 기회를 얻는다.
 class NumberRange{
     constructor(min,max){
         this._data = {min:min, max:max};
     }
-    get min(){return this._data.min};
-    get max(){return this._data.max};
+    get min(){return this._data.min;}
+    get max(){return this._data.max;}
+    contains(arg){return arg>=this.min&&arg<=this.max;}
 }
