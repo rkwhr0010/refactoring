@@ -10,9 +10,8 @@ const taxableCharge2 = Math.max(0,base-taxTreshold(aReading2.year));
 //클라이언트3
 const rawReading = acquireReading();
 const aReading3 = new Reading(rawReading);
-const basicChargeAmount = aReading3.calculateBaseCharge;
+const basicChargeAmount = aReading3.baseCharge;
 
-//레코드를 클래스로 캡슐화
 class Reading{
     constructor(data){
         this._customer = data.customer;
@@ -24,8 +23,8 @@ class Reading{
     get quantity(){return this._quantity;}
     get month(){return this._month;}
     get year(){return this._year;}
-    //함수 옮김
-    get calculateBaseCharge(){
+    //알맞은 이름 짓기
+    get baseCharge(){
         return baseRate(this.month, this.year);
     }
 }
