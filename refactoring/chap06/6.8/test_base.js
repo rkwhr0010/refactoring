@@ -8,18 +8,13 @@ const station = {
         {temp:51, time: "2016-11-10 09:50"},
     ]
 };
-//새로운 데이터 구조 매개변수 추가
-function readingsOutsideRange(station, min, /*max,*/ range){
+function readingsOutsideRange(station, range){
     return station.readings
         .filter(r => r.temp < min || r.temp > range.max);
 }
 const range = new NumberRange(operationPlan.temperatureFloor,
                              operationPlan.temperatureCeiling);
-let alerts = readingsOutsideRange(station, 
-     operationPlan.temperatureFloor,
-    // operationPlan.temperatureCeiling,
-    range);
-
+let alerts = readingsOutsideRange(station, range);
 class NumberRange{
     constructor(min,max){
         this._data = {min:min, max:max};
