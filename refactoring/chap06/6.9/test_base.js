@@ -8,11 +8,10 @@ const aReading2 = acquireReading();
 const baseCharge2 = baseRate(aReading2.month, aReading2.year) * aReading2.quantity;
 const taxableCharge2 = Math.max(0,base-taxTreshold(aReading2.year));
 //클라이언트3
-const aReading3 = acquireReading();
-const basicChargeAmount3 = calculateBaseCharge(aReading3);
-function calculateBaseCharge(aReading){
-    return baseRate(aReading.month, aReading.year);
-}
+const rawReading = acquireReading();
+const aReading3 = new Reading(rawReading);
+const basicChargeAmount = aReading3.calculateBaseCharge;
+
 //레코드를 클래스로 캡슐화
 class Reading{
     constructor(data){
@@ -25,4 +24,8 @@ class Reading{
     get quantity(){return this._quantity;}
     get month(){return this._month;}
     get year(){return this._year;}
+    //함수 옮김
+    get calculateBaseCharge(){
+        return baseRate(this.month, this.year);
+    }
 }
