@@ -7,11 +7,7 @@ const baseCharge = aReading.baseRate;
 //클라이언트2
 const rawReading2 = acquireReading();
 const aReading2 = new Reading(rawReading);
-const taxableCharge2 = taxableChargeFn() ;
-//함수로 추출
-function taxableChargeFn() {
-    return Math.max(0, aReading2.baseRate - taxTreshold(aReading2.year));
-}
+const taxableCharge2 = aReading2.taxableCharge;
 
 //클라이언트3
 const rawReading3 = acquireReading();
@@ -29,9 +25,11 @@ class Reading{
     get quantity(){return this._quantity;}
     get month(){return this._month;}
     get year(){return this._year;}
-    //알맞은 이름 짓기
     get baseCharge(){
         return baseRate(this.month, this.year);
+    }
+    get taxableCharge() {
+        return Math.max(0, this.baseRate - taxTreshold(aReading2.year));
     }
 }
 
