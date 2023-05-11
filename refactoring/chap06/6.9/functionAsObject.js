@@ -1,3 +1,4 @@
+//함수를 객체처럼 
 function Cat(name){
     return {
         name : name,
