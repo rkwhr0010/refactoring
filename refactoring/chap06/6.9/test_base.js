@@ -7,7 +7,12 @@ const baseCharge = aReading.baseRate;
 //클라이언트2
 const rawReading2 = acquireReading();
 const aReading2 = new Reading(rawReading);
-const taxableCharge2 = Math.max(0,aReading2.baseRate-taxTreshold(aReading2.year));
+const taxableCharge2 = taxableChargeFn() ;
+//함수로 추출
+function taxableChargeFn() {
+    return Math.max(0, aReading2.baseRate - taxTreshold(aReading2.year));
+}
+
 //클라이언트3
 const rawReading3 = acquireReading();
 const aReading3 = new Reading(rawReading3);
@@ -29,3 +34,4 @@ class Reading{
         return baseRate(this.month, this.year);
     }
 }
+
