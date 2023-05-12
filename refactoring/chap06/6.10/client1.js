@@ -1,3 +1,4 @@
-//client1.js  기본 요금 계산 코드
-const aReading = acquireReading();
-const baseCharge = baseRate(aReading.month, aReading.year) *aReading.quantity;
+//client1도 수정
+const rawReading = acquireReading();
+const aReading = enrichReading(rawReading);
+const baseCharge = aReading.baseCharge;
