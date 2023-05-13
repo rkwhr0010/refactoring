@@ -31,8 +31,9 @@ numAdvancedCourses = aPerson.courses
     .length;
 
 
-//클라이언트
 const basicCourseNames = readBasicCourseNames(filename);
+//만들어둔 메서드를 사용해야해서, 이제 이방식으론 저장 못한다.
 aPerson.courses = basicCourseNames.map(name => new Course(name, false));
-//Person에서 게터로 수업컬렉션을 못가져오지만
-//내가 수업 컬렉션을 세터로 설정하면, 수업 컬렉션을 수정해 캡슐화가 깨질 수 있다.
+for(const name of basicCourseNames){
+    aPerson.courses.addCourse(new Course(name,false));
+}
