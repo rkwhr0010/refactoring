@@ -20,10 +20,11 @@ let customerData = {
     }
 }
 getCustomerData().setUsage(customerID, year, month, amount);//쓰기
-
-function compareUsage(customerID, laterYear, month){//읽기
-    const later = getCustomerData().usage(customerID,laterYear,month);
-    const earlier = getCustomerData().usage(customerID,laterYear-1,month);
+//사용자가 데이터를 요청해 그 값을 수정하면 캡슐화가 깨질 수 있다.
+//복사본으로 처리하는 게 가장 간단한 방식
+function compareUsage(customerID, laterYear, month){
+    const later = getCustomerData().rawData[customerID].usages[year][month];
+    const earlier = getCustomerData().rawData[customerID].usages[year][month];
     return {laterAmount: later, change:later-earlier};
 }
 function getCustomerData(){return customerData;}
