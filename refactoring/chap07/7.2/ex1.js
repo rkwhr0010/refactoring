@@ -4,9 +4,7 @@ class Person{
         this._courses = [];
     }
     get name(){return this._name;}
-    get courses(){return this._courses;}
-    //세터를 제거한다. 만약 제공해야한다면 복사본을 저장한다.
-    // set courses(aList){this.courses = _.cloneDeep(aList);}
+    get courses(){return _.cloneDeep(this._courses);}
     addCourse(aCourse){
         this._courses.push(aCourse);
     }
