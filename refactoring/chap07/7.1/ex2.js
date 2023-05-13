@@ -19,11 +19,7 @@ let customerData = {
         // 다른 고객 정보 생략...
     }
 }
-setUsage(customerID, year, month, amount);//쓰기
-//데이터 구조 안으로 들어가는 세터 함수화
-function setUsage(customerID, year, month, amount) {
-    getRawDataOfCustomers()[customerID].usages[year][month] = amount;
-}
+getCustomerData().setUsage(customerID, year, month, amount);//쓰기
 
 function compareUsage(customerID, laterYear, month){//읽기
     const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
@@ -34,8 +30,12 @@ function getCustomerData(){return customerData;}
 function getRawDataOfCustomers(){return customerData._data;}//기존 호환용
 function setRawDataOfCustomers(arg){customerData = new CustomerData(arg);}
 
+//클래스로 함수 옮기기
 class CustomerData{
     constructor(data){
         this._data = data;
+    }
+    setUsage(customerID, year, month, amount) {
+        getRawDataOfCustomers()[customerID].usages[year][month] = amount;
     }
 }
