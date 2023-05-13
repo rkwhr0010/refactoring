@@ -19,15 +19,14 @@ let customerData = {
         // 다른 고객 정보 생략...
     }
 }
-
-//중첩구조가 심할수록 데이터 일고/쓰기가 힘들어진다.
-customerData[customerID].usages[year][month] = amount;//쓰기
+getRawDataOfCustomers()[customerID].usages[year][month] = amount;//쓰기
 function compareUsage(customerID, laterYear, month){//읽기
-    const later = customerData[customerID].usages[laterYear][month];
-    const earlier = customerData[customerID].usages[laterYear-1][month];
+    const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
+    const earlier = getRawDataOfCustomers()[customerID].usages[laterYear-1][month];
     return {laterAmount: later, change:later-earlier};
 }
 
-
-
+//변수 캡슐화부터 시작
+function getRawDataOfCustomers(){return customerData;}
+function setRawDataOfCustomers(arg){customerData = arg;}
 
