@@ -26,8 +26,8 @@ function compareUsage(customerID, laterYear, month){//읽기
     return {laterAmount: later, change:later-earlier};
 }
 function getCustomerData(){return customerData;}
-function getRawDataOfCustomers(){return customerData;}
-function setRawDataOfCustomers(arg){customerData = arg;}
+function getRawDataOfCustomers(){return getCustomerData()._data;}//기존 호환용
+function setRawDataOfCustomers(arg){customerData = new CustomerData(arg);}
 
 //데이터 구조를 표햔하는 클래스 정의 후 이를 반환하는 함수 만듦
 class CustomerData{
