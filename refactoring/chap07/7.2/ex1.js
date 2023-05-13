@@ -5,8 +5,8 @@ class Person{
     }
     get name(){return this._name;}
     get courses(){return this._courses;}
-    set courses(arg){this.courses = arg;}
-    //제대로된 캡슐화를 위해 수업추가/제거 메서드 추가
+    //세터를 제거한다. 만약 제공해야한다면 복사본을 저장한다.
+    // set courses(aList){this.courses = _.cloneDeep(aList);}
     addCourse(aCourse){
         this._courses.push(aCourse);
     }
@@ -30,10 +30,7 @@ numAdvancedCourses = aPerson.courses
     .filter(c=>c.isAdvanced)
     .length;
 
-
 const basicCourseNames = readBasicCourseNames(filename);
-//만들어둔 메서드를 사용해야해서, 이제 이방식으론 저장 못한다.
-aPerson.courses = basicCourseNames.map(name => new Course(name, false));
 for(const name of basicCourseNames){
     aPerson.courses.addCourse(new Course(name,false));
 }
