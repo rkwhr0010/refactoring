@@ -19,13 +19,18 @@ public class TestEx {
 		}
 	}
 	//최상위 별도 클래스 파일로 뺏다고 가정
+	//CommandLine.java
 	private static class CommandLine{
+		String[] args;
 
+		public CommandLine(String[] args) {
+			this.args = args;
+		}
 	}
-
+	//Main.java
 	static long run(String[] args) throws IOException{
 		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-		CommandLine commandLine = new CommandLine();
+		CommandLine commandLine = new CommandLine(args);
 		String filename = args[args.length -1];
 		return countOrders(commandLine, args, filename);
 	}
