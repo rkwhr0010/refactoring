@@ -28,20 +28,23 @@ public class TestEx {
 		public  String filename() {
 			return args[args.length -1];
 		}
+		//함수 추출 후, 클래스로 옮김 이후, 불필요한 인자 제거 
+		public boolean onlyCountReady() {
+			return Stream.of(args).anyMatch(arg->"-r".equals(arg));
+		}
 	}
 	//Main.java
 	static long run(String[] args) throws IOException{
 		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 		CommandLine commandLine = new CommandLine(args);
-		return countOrders(commandLine, args);
+		return countOrders(commandLine);
 	}
-	//매개변수 정리
-	private static long countOrders(CommandLine commandLine, String[] args)
+	private static long countOrders(CommandLine commandLine)
 			throws IOException {
 		File input = Paths.get(commandLine.filename()).toFile();
 		ObjectMapper mapper = new ObjectMapper();
 		Order[] orders = mapper.readValue(input, Order[].class);
-		if(Stream.of(args).anyMatch(arg->"-r".equals(arg))) {
+		if(commandLine.onlyCountReady()) {
 			return Stream.of(orders)
 					.filter(o->"ready".equals(o.status))
 					.count();
