@@ -20,17 +20,20 @@ public class TestEx {
 			System.exit(1);
 		}
 	}
-	//잔여 매개변수 처리 완료
+	//메인 작업 완료, 잔여 코드 정리(리팩터링)
 	private static class CommandLine{
 		private boolean onlyCountReady;
 		private String filename;
 	}
 	static long run(String[] args) throws IOException{
+		return countOrders(parseCommandLine(args));
+	}
+	private static CommandLine parseCommandLine(String[] args) {
 		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-		CommandLine commandLine = new CommandLine();
-		commandLine.filename = args[args.length -1];
-		commandLine.onlyCountReady = Stream.of(args).anyMatch(arg->"-r".equals(arg));
-		return countOrders(commandLine);
+		CommandLine result = new CommandLine();
+		result.filename = args[args.length -1];
+		result.onlyCountReady = Stream.of(args).anyMatch(arg->"-r".equals(arg));
+		return result;
 	}
 	private static long countOrders(CommandLine commandLine)
 			throws IOException {
