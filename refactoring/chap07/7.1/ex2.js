@@ -30,12 +30,17 @@ function getCustomerData(){return customerData;}
 function getRawDataOfCustomers(){return customerData._data;}//기존 호환용
 function setRawDataOfCustomers(arg){customerData = new CustomerData(arg);}
 
-//클래스로 함수 옮기기
 class CustomerData{
     constructor(data){
         this._data = data;
     }
     setUsage(customerID, year, month, amount) {
         getRawDataOfCustomers()[customerID].usages[year][month] = amount;
+    }
+    //객체의 모든 필드가 불변이 아니라면, 캡슐화가 꺠질 수 있다.
+    //그렇다고 customerData 를 사용하는 모든 코드를 확인 했는지 알 수가 없다.
+    //복사본을 리턴해서 처리한다.
+    get rawData(){
+        return _.cloneDeep(this._data);
     }
 }
