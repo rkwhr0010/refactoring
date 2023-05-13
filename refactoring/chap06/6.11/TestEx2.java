@@ -23,19 +23,20 @@ public class TestEx {
 		String[] args;
 
 		public CommandLine(String[] args) {
+			//검사로직 옮기기, 리팩터링 완료
+			if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 			this.args = args;
 		}
 		public  String filename() {
 			return args[args.length -1];
 		}
-		//함수 추출 후, 클래스로 옮김 이후, 불필요한 인자 제거 
 		public boolean onlyCountReady() {
 			return Stream.of(args).anyMatch(arg->"-r".equals(arg));
 		}
 	}
 	//Main.java
 	static long run(String[] args) throws IOException{
-		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+		
 		CommandLine commandLine = new CommandLine(args);
 		return countOrders(commandLine);
 	}
