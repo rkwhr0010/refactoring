@@ -6,6 +6,15 @@ class Person{
     get name(){return this._name;}
     get courses(){return this._courses;}
     set courses(arg){this.courses = arg;}
+    //제대로된 캡슐화를 위해 수업추가/제거 메서드 추가
+    addCourse(aCourse){
+        this._courses.push(aCourse);
+    }
+    removeCourse(aCourse, fnIfAbsent= () => {throw new RangeError();}){
+        const index = this._courses.indexOf(aCourse);
+        if(index=== -1) fnIfAbsent();
+        else this._courses.splice(index,1);
+    }
 }
 class Course {
     constructor(name, isAdvanced){
