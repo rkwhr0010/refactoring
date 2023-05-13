@@ -22,8 +22,8 @@ let customerData = {
 getCustomerData().setUsage(customerID, year, month, amount);//쓰기
 
 function compareUsage(customerID, laterYear, month){//읽기
-    const later = getRawDataOfCustomers()[customerID].usages[laterYear][month];
-    const earlier = getRawDataOfCustomers()[customerID].usages[laterYear-1][month];
+    const later = getCustomerData().usage(customerID,laterYear,month);
+    const earlier = getCustomerData().usage(customerID,laterYear-1,month);
     return {laterAmount: later, change:later-earlier};
 }
 function getCustomerData(){return customerData;}
@@ -37,10 +37,11 @@ class CustomerData{
     setUsage(customerID, year, month, amount) {
         getRawDataOfCustomers()[customerID].usages[year][month] = amount;
     }
-    //객체의 모든 필드가 불변이 아니라면, 캡슐화가 꺠질 수 있다.
-    //그렇다고 customerData 를 사용하는 모든 코드를 확인 했는지 알 수가 없다.
-    //복사본을 리턴해서 처리한다.
     get rawData(){
         return _.cloneDeep(this._data);
+    }
+    //읽기 처리
+    usage(customerID, year, month){
+        return this._data[customerID].usages[year][month];
     }
 }
