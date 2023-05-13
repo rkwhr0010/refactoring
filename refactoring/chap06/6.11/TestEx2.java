@@ -18,7 +18,6 @@ public class TestEx {
 			System.exit(1);
 		}
 	}
-	//최상위 별도 클래스 파일로 뺏다고 가정
 	//CommandLine.java
 	private static class CommandLine{
 		String[] args;
@@ -31,8 +30,11 @@ public class TestEx {
 	static long run(String[] args) throws IOException{
 		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 		CommandLine commandLine = new CommandLine(args);
-		String filename = args[args.length -1];
-		return countOrders(commandLine, args, filename);
+		return countOrders(commandLine, args, filename(args));
+	}
+	//임시변수를 질의함수로 바꾸기
+	private static String filename(String[] args) {
+		return args[args.length -1];
 	}
 	private static long countOrders(CommandLine commandLine, String[] args, String filename)
 			throws IOException {
