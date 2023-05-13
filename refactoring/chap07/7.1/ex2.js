@@ -25,8 +25,13 @@ function compareUsage(customerID, laterYear, month){//읽기
     const earlier = getRawDataOfCustomers()[customerID].usages[laterYear-1][month];
     return {laterAmount: later, change:later-earlier};
 }
-
-//변수 캡슐화부터 시작
+function getCustomerData(){return customerData;}
 function getRawDataOfCustomers(){return customerData;}
 function setRawDataOfCustomers(arg){customerData = arg;}
 
+//데이터 구조를 표햔하는 클래스 정의 후 이를 반환하는 함수 만듦
+class CustomerData{
+    constructor(data){
+        this._data = data;
+    }
+}
