@@ -20,20 +20,21 @@ public class TestEx {
 			System.exit(1);
 		}
 	}
+	//잔여 매개변수 처리 완료
 	private static class CommandLine{
 		private boolean onlyCountReady;
+		private String filename;
 	}
 	static long run(String[] args) throws IOException{
 		if(args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 		CommandLine commandLine = new CommandLine();
-		String filename = args[args.length -1];
-		//중간 데이토 구조로 옮김, 이후 첫번째 단계로 옮김, 이후 매개변수 제거
+		commandLine.filename = args[args.length -1];
 		commandLine.onlyCountReady = Stream.of(args).anyMatch(arg->"-r".equals(arg));
-		return countOrders(commandLine, filename);
+		return countOrders(commandLine);
 	}
-	private static long countOrders(CommandLine commandLine, String filename)
+	private static long countOrders(CommandLine commandLine)
 			throws IOException {
-		File input = Paths.get(filename).toFile();
+		File input = Paths.get(commandLine.filename).toFile();
 		ObjectMapper mapper = new ObjectMapper();
 		Order[] orders = mapper.readValue(input, Order[].class);
 
