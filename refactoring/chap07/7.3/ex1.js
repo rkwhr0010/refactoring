@@ -1,4 +1,4 @@
-//우선순위 자체가 아닌 우선순위를 표현하는 문자열 표현
+//우선순위 자체가 아닌 우선순위를 표현하는 문자열 표현.
 class Order{
     constructor(data){
         this._priority = data.priority;
