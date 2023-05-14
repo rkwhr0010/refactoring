@@ -4,8 +4,7 @@ class Order {
         this._item = item;
     }
     get price(){
-        const discountFactor = this.discountFactor;
-        return this.basePrice * discountFactor;
+        return this.basePrice * this.discountFactor;
     }
     //게터 추출
     get discountFacter() {
