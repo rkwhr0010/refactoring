@@ -1,4 +1,7 @@
 function disabilityAmount(anEmployee){
-    //합친 후 항상 테스트
-    if(anEmployee.seniority < 2 || anEmployee.monthsDisabled > 12 || anEmployee.isPartTime) return 0;
+    if(isNotEligibleForDisability()) return 0;
+    //함수로 추출
+    function isNotEligibleForDisability() {
+        return anEmployee.seniority < 2 || anEmployee.monthsDisabled > 12 || anEmployee.isPartTime;
+    }
 }
