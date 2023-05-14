@@ -3,7 +3,7 @@ class Order{
         this._priority = data.priority;
     }
     //정의한 클래스 사용하도록 변경
-    get priority(){return this._priority.toString();}
+    get priorityString(){return this._priority.toString();}
     set priority(aString){this._priority = new Priority(aString);}
 }
 class Priority{
@@ -16,6 +16,6 @@ class Priority{
 
 
 //클라이언트
-let highPriorityCount = orders.filter(o => "high" === o.priority
-                                        || "rush" === o.priority)
+let highPriorityCount = orders.filter(o => "high" === o.priorityString
+                                        || "rush" === o.priorityString)
                               .length;
