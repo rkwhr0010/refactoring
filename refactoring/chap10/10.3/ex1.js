@@ -1,9 +1,9 @@
 function payAmount(employee){
     let result;
-    if(employee.isSeparated){//퇴사한 직원
-        result = {amount:0,reasonCode:"SEP"};
+    //가장 바깥조건부터 보호구문으로 변경
+    if(employee.isSeparated){return {amount:0,reasonCode:"SEP"};
     }else{
-        if(employee.isRetired){//은퇴한 직원
+        if(employee.isRetired){
             result = {amount:0, reasonCode:"RET"};
         }else{//급여 계산 로직
             lorem.ipsum(dolor.sitAmet);
