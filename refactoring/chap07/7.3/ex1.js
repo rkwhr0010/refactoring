@@ -2,14 +2,15 @@ class Order{
     constructor(data){
         this._priority = data.priority;
     }
-    get priority(){return this._priority;}
-    set priority(arg){this._priority = arg;}
+    //정의한 클래스 사용하도록 변경
+    get priority(){return this._priority.toString();}
+    set priority(aString){this._priority = new Priority(aString);}
 }
-//우선순위 속성을 표현하는 값 클래스 정의
 class Priority{
     constructor(value){
         this._value = value;
     }
+    //get value() 가 아닌 변환함수 사용
     toString(){return this._value;}
 }
 
