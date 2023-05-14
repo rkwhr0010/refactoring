@@ -1,9 +1,16 @@
+//나머지도 정리
 if(summer()){
-    charge = quantity * plan.summerRate;
+    charge = summerCharge();
 }else{
-    charge = quantity * plan.regularRate + plan.regularServiceCharge;
+    charge = regularCharge();
 }
-//추출
+function regularCharge() {
+    return quantity * plan.regularRate + plan.regularServiceCharge;
+}
+
+function summerCharge() {
+    return quantity * plan.summerRate;
+}
 function summer() {
     return !aDate.isBefore(plan.summerStrat) && !aDate.isAfter(plan.summerEnd);
 }
