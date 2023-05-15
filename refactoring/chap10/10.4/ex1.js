@@ -35,7 +35,7 @@ class Bird{
 }
 // 팩터리 메서드
 function createBird(bird){
-    switch (this.type) {
+    switch (bird.type) {
     case "유럽 제비":
         return new EuropeanSwallow(bird);
     case "아프리카 제비":
