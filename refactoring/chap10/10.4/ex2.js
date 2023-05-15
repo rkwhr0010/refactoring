@@ -43,9 +43,7 @@ class Rating{
         return result;
     }
     get historyLengthFactor() {
-        let result = 0;
-        if (this.history.length > 8) result += 1;
-        return result;
+        return (this.history.length > 8) ? 1 : 0;
     }
 
     get hasChinaHistory(){ 
@@ -68,9 +66,7 @@ class ExperiencedChinaRating extends Rating{
         return result;
     }
     get historyLengthFactor() {
-        let result = 0;
-        if (this.history.length > 10) result += 1;
-        return result;
+        return (this.history.length > 10) ? 1 : 0;
     }
 }
 //팩터리 함수
