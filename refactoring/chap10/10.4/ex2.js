@@ -1,7 +1,6 @@
 function rating(voyage, history){
     return createRating(voyage,history).value;
 }
-//기본 동작을 담당할 클래스
 class Rating{
     constructor(voyage,history){
         this.voyage = voyage;
@@ -36,7 +35,6 @@ class Rating{
         result += this.historyLengthFactor;
         return result;
     }
-    //And 가 분리됐으니 함수 이름 변경 및 추가 정리
     get vogageLengthFactor() {
         return (this.voyage.length > 14) ? -1 : 0;
     }
@@ -53,14 +51,12 @@ class ExperiencedChinaRating extends Rating{
         const result = super.captainHistoryRisk - 2; 
         return Math.max(result,0);
     }
-    //ExperiencedChinaRating class 속...
     get voyageProfitFactor(){
         return super.voyageProfitFactor + 3;
     }
 
     get vogageLengthFactor() {
         let result = 0;
-        // result += 3; voyageProfitFactor으로 옮기는 것이 좋아보인다.
         if (this.voyage.length > 12) result += 1;
         if (this.voyage.length > 18) result -= 1;
         return result;
@@ -69,7 +65,6 @@ class ExperiencedChinaRating extends Rating{
         return (this.history.length > 10) ? 1 : 0;
     }
 }
-//팩터리 함수
 function createRating(voyage, history){
     if(voyage.zone === "중국" && history.some(v=>"중국" === v.zone))
         return new ExperiencedChinaRating(voyage,history);
