@@ -1,4 +1,3 @@
-//팩터리 함수 사용하도록 수정
 function rating(voyage, history){
     return createRating(voyage,history).value;
 }
@@ -29,7 +28,6 @@ class Rating{
         result += this.history.filter( v => v.profit < 0).length;
         return Math.max(result,0);
     }
-    //Rating class 속 ... voyageProfitFactor함수는 추출하기 까다롭다.
     get voyageProfitFactor(){
         let result = 2;
         if(this.voyage.zone === "중국") result += 1;
@@ -37,14 +35,14 @@ class Rating{
         result += this.vogageAndHistoryLengthFactor;
         return result;
     }
-    get vogageAndHistoryLengthFactor {
+    get vogageAndHistoryLengthFactor() {
         let result = 0;
         if (this.history.length > 8) result += 1;
         if (this.voyage.length > 14) result -= 1;
         return result;
     }
 
-    get hasChinaHistory(){ //중국을 경유하나
+    get hasChinaHistory(){ 
         return this.history.some(v=>"중국" === v.zone);
     }
 }
@@ -54,7 +52,7 @@ class ExperiencedChinaRating extends Rating{
         const result = super.captainHistoryRisk - 2; 
         return Math.max(result,0);
     }
-    get vogageAndHistoryLengthFactor {
+    get vogageAndHistoryLengthFactor() {
         let result = 0;
         result += 3;
         if (this.history.length > 10) result += 1;
