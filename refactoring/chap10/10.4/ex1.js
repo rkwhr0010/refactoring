@@ -11,7 +11,7 @@ class Bird{
     get plumage(){
         switch (this.type) {
         case "유럽 제비":
-            return "보통이다";
+            throw "오류 발생";
         case "아프리카 제비":
             return (this.numberOfCocounts>2) ? "지쳤다" : "보통이다";
         case "노르웨이 파랑 앵무":
@@ -33,7 +33,6 @@ class Bird{
         }
     }
 }
-// 팩터리 메서드
 function createBird(bird){
     switch (bird.type) {
     case "유럽 제비":
@@ -46,9 +45,11 @@ function createBird(bird){
         return new Bird(bird);
     }
 }
-//서브클래스
 class EuropeanSwallow extends Bird{
-
+    //하나 씩 오버라이드 시작
+    get plumage(){
+        return "보통이다";
+    }
 }
 class AfricanSwallow extends Bird{
 
