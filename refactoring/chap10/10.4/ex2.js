@@ -29,7 +29,7 @@ class Rating{
         result += this.history.filter( v => v.profit < 0).length;
         return Math.max(result,0);
     }
-    //Rating class 속...
+    //Rating class 속 ... voyageProfitFactor함수는 추출하기 까다롭다.
     get voyageProfitFactor(){
         let result = 2;
         if(this.voyage.zone === "중국") result += 1;
