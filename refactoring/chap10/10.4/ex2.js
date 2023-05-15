@@ -28,6 +28,7 @@ class Rating{
         result += this.history.filter( v => v.profit < 0).length;
         return Math.max(result,0);
     }
+    //Rating class 속...
     get voyageProfitFactor(){
         let result = 2;
         if(this.voyage.zone === "중국") result += 1;
@@ -36,9 +37,9 @@ class Rating{
         result += this.historyLengthFactor;
         return result;
     }
-    //Rating class 속...
     get vogageAndHistoryLengthFactor() {
         let result = 0;
+        // result = this.historyLengthFactor;
         if (this.voyage.length > 14) result -= 1;
         return result;
     }
@@ -56,10 +57,10 @@ class ExperiencedChinaRating extends Rating{
         const result = super.captainHistoryRisk - 2; 
         return Math.max(result,0);
     }
-    //ExperiencedChinaRating class 속...
     get vogageAndHistoryLengthFactor() {
         let result = 0;
         result += 3;
+        // result = this.historyLengthFactor;
         if (this.voyage.length > 12) result += 1;
         if (this.voyage.length > 18) result -= 1;
         return result;
