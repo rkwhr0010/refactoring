@@ -33,12 +33,12 @@ class Rating{
         if(this.voyage.zone === "중국") result += 1;
         if(this.voyage.zone === "동인도") result += 1;
         result += this.vogageAndHistoryLengthFactor;
+        result += this.historyLengthFactor;
         return result;
     }
     //Rating class 속...
     get vogageAndHistoryLengthFactor() {
         let result = 0;
-        result += this.historyLengthFactor;
         if (this.voyage.length > 14) result -= 1;
         return result;
     }
@@ -60,7 +60,6 @@ class ExperiencedChinaRating extends Rating{
     get vogageAndHistoryLengthFactor() {
         let result = 0;
         result += 3;
-        result = this.historyLengthFactor;
         if (this.voyage.length > 12) result += 1;
         if (this.voyage.length > 18) result -= 1;
         return result;
