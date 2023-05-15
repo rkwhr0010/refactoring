@@ -28,20 +28,17 @@ class Rating{
         result += this.history.filter( v => v.profit < 0).length;
         return Math.max(result,0);
     }
-    //Rating class 속...
     get voyageProfitFactor(){
         let result = 2;
         if(this.voyage.zone === "중국") result += 1;
         if(this.voyage.zone === "동인도") result += 1;
-        result += this.vogageAndHistoryLengthFactor;
+        result += this.vogageLengthFactor;
         result += this.historyLengthFactor;
         return result;
     }
-    get vogageAndHistoryLengthFactor() {
-        let result = 0;
-        // result = this.historyLengthFactor;
-        if (this.voyage.length > 14) result -= 1;
-        return result;
+    //And 가 분리됐으니 함수 이름 변경 및 추가 정리
+    get vogageLengthFactor() {
+        return (this.voyage.length > 14) ? -1 : 0;
     }
     get historyLengthFactor() {
         return (this.history.length > 8) ? 1 : 0;
@@ -51,16 +48,19 @@ class Rating{
         return this.history.some(v=>"중국" === v.zone);
     }
 }
-//변형 동작을 담을 빈 서브 클래스
 class ExperiencedChinaRating extends Rating{
     get captainHistoryRisk(){
         const result = super.captainHistoryRisk - 2; 
         return Math.max(result,0);
     }
-    get vogageAndHistoryLengthFactor() {
+    //ExperiencedChinaRating class 속...
+    get voyageProfitFactor(){
+        return super.voyageProfitFactor + 3;
+    }
+
+    get vogageLengthFactor() {
         let result = 0;
-        result += 3;
-        // result = this.historyLengthFactor;
+        // result += 3; voyageProfitFactor으로 옮기는 것이 좋아보인다.
         if (this.voyage.length > 12) result += 1;
         if (this.voyage.length > 18) result -= 1;
         return result;
