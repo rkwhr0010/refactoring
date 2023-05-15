@@ -1,10 +1,9 @@
 function plumage(bird){
-    return new Bird(bird).plumage;
+    return createBird(bird).plumage;
 }
 function speed(bird){
-    return new Bird(bird).airSpeedVelocity;
+    return createBird(bird).airSpeedVelocity;
 }
-// 여러 함수를 클래스로 묶기 리팩터링 
 class Bird{
     constructor(birdObject){
         Object.assign(this. birdObject);
@@ -34,3 +33,27 @@ class Bird{
         }
     }
 }
+// 팩터리 메서드
+function createBird(bird){
+    switch (this.type) {
+    case "유럽 제비":
+        return new EuropeanSwallow(bird);
+    case "아프리카 제비":
+        return new AfricanSwallow(bird);
+    case "노르웨이 파랑 앵무":
+        return new NorwegianBlueParrot(bird);
+    default:
+        return new Bird(bird);
+    }
+}
+//서브클래스
+class EuropeanSwallow extends Bird{
+
+}
+class AfricanSwallow extends Bird{
+
+}
+class NorwegianBlueParrot extends Bird{
+
+}
+
