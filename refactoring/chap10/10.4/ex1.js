@@ -8,17 +8,9 @@ class Bird{
     constructor(birdObject){
         Object.assign(this. birdObject);
     }
+    //오버라이드한 후 슈퍼클래스 메서드 상태
     get plumage(){
-        switch (this.type) {
-        case "유럽 제비":
-            throw "오류 발생";
-        case "아프리카 제비":
-            return (this.numberOfCocounts>2) ? "지쳤다" : "보통이다";
-        case "노르웨이 파랑 앵무":
-            return (this.voltage > 100) ? "그을렸다" : "예쁘다" ;
-        default:
-            return "알 수 없다";
-        }
+        return "알 수 없다";
     }
     get airSpeedVelocity(){
         switch (this.type) {
@@ -46,15 +38,18 @@ function createBird(bird){
     }
 }
 class EuropeanSwallow extends Bird{
-    //하나 씩 오버라이드 시작
     get plumage(){
         return "보통이다";
     }
 }
 class AfricanSwallow extends Bird{
-
+    get plumage(){
+        return (this.numberOfCocounts>2) ? "지쳤다" : "보통이다";
+    }
 }
 class NorwegianBlueParrot extends Bird{
-
+    get plumage(){
+        return (this.voltage > 100) ? "그을렸다" : "예쁘다" ;
+    }
 }
 
