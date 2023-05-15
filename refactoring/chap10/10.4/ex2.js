@@ -15,19 +15,19 @@ class Rating{
         if(vpf * 3 > (vr+chr*2)) return "A";
         else return "B";
     }
-    get voyageRisk(){//항해 경로 위험요소
+    get voyageRisk(){
         let result = 1;
         if(this.voyage.length > 4) result +=2;
         if(this.voyage.length > 8) result += this.voyage.length -8 ;
         if(["중국","동인도"].includes(this.voyage.zone)) result += 4;
         return Math.max(result,0);
     }
-    
-    get captainHistoryRisk(){//선장 향해 이력 위험요소
+    //Rating class 속...
+    get captainHistoryRisk(){
         let result = 1;
         if(this.history.length<5) result +=4;
         result += this.history.filter( v => v.profit < 0).length;
-        if(this.voyage.zone ==="중국" && this.hasChinaHistory) result -= 2;
+        // if(this.voyage.zone ==="중국" && this.hasChinaHistory) result -= 2;
         return Math.max(result,0);
     }
 
@@ -52,7 +52,10 @@ class Rating{
 }
 //변형 동작을 담을 빈 서브 클래스
 class ExperiencedChinaRating extends Rating{
-
+    get captainHistoryRisk(){
+        const result = super.captainHistoryRisk - 2; 
+        return Math.max(result,0);
+    }
 }
 //팩터리 함수
 function createRating(voyage, history){
