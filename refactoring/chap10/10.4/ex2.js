@@ -1,7 +1,7 @@
 function rating(voyage, history){//투자 등급
     return new Rating(voyage,history);
 }
-//다형성 적용을 위해선 클래스가 있어야하니 여러 함수를 클래스로 묶기 적용
+//기본 동작을 담당할 클래스
 class Rating{
     constructor(voyage,history){
         this.voyage = voyage;
@@ -48,6 +48,16 @@ class Rating{
     get hasChinaHistory(){ //중국을 경유하나
         return this.history.some(v=>"중국" === v.zone);
     }
+}
+//변형 동작을 담을 빈 서브 클래스
+class ExperiencedChinaRating extends Rating{
+
+}
+//팩터리 함수
+function createRating(voyage, history){
+    if(voyage.zone === "중국" && history.some(v=>"중국" === v.zone))
+        return new ExperiencedChinaRating(voyage,history);
+    else return new Rating(voyage, history);
 }
 
 
