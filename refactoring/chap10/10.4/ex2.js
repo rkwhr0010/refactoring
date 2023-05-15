@@ -1,5 +1,6 @@
-function rating(voyage, history){//투자 등급
-    return new Rating(voyage,history);
+//팩터리 함수 사용하도록 수정
+function rating(voyage, history){
+    return createRating(voyage,history).value;
 }
 //기본 동작을 담당할 클래스
 class Rating{
@@ -69,5 +70,5 @@ const history = [
     {zone : "중국", profit: -2},
     {zone : "서아프리카", profit: 7},
 ];
-const myRating = rating(voyage, history).value;
+const myRating = rating(voyage, history);
 console.log(myRating);
