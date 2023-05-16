@@ -15,34 +15,31 @@ class Customer{
 //미확인 고객 전용 클래스
 class UnknownCustomer{
     get isUnknown(){return true;}
+    //특이 케이스 검사를 일반적인 기본값으로 대체할 수 있다.
+    get name(){return "거주자";}
 }
+//"미확인 고객" 문자열 확인하는 코드가 사라짐
 function isUnknown(arg){
     if (!(arg instanceof Customer || arg instanceof UnknownCustomer))
         throw new Error(`잘못된 값과 비교 <${arg}>`);
     return arg.isUnknown;
 }
-
-//클라리언트1이라고 가정
 function client1(){
+    /*
     const aCustomer = site.customer;
-    /**코드 들..*/
     let customerName;
-    if(isUnknown(aCustomer)) customerName = "거주자";
-    else customerName =aCustomer.name;
+    if(isUnknown(aCustomer)) customerName = "거주자"; 
+    */
+    const aCustomer = aCustomer.name;
 }
-//클라이언트2
 function client2(){
     const plan = (isUnknown(aCustomer))
         ? registry.buillingPlans.basic
         : aCustomer.buillingPlan;
-    /**코드 들..*/
 }
-//클라이언트3
 function client3(){
     if(!isUnknown(aCustomer)) aCustomer.buillingPlan = newPlan;
-    /**코드 들..*/
 }
-//클라이언트4
 function client4(){
     const weeksDelinquent = (isUnknown(aCustomer))
         ? 0
