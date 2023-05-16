@@ -26,24 +26,24 @@ function client1(){
     const aCustomer = site.customer;
     /**코드 들..*/
     let customerName;
-    if(aCustomer === "미확인 고객") customerName = "거주자";
+    if(isUnknown(aCustomer)) customerName = "거주자";
     else customerName =aCustomer.name;
 }
 //클라이언트2
 function client2(){
-    const plan = (aCustomer === "미확인 고객")
+    const plan = (isUnknown(aCustomer))
         ? registry.buillingPlans.basic
         : aCustomer.buillingPlan;
     /**코드 들..*/
 }
 //클라이언트3
 function client3(){
-    if(aCustomer !== "미확인 고객") aCustomer.buillingPlan = newPlan;
+    if(!isUnknown(aCustomer)) aCustomer.buillingPlan = newPlan;
     /**코드 들..*/
 }
 //클라이언트4
 function client4(){
-    const weeksDelinquent = (aCustomer === "미확인 고객")
+    const weeksDelinquent = (isUnknown(aCustomer))
         ? 0
         : aCustomer.paymentHistory.weeksDelinquentInLastYear;
 }
