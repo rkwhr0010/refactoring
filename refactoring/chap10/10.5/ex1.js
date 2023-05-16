@@ -10,10 +10,16 @@ class Customer{
     //미확인 고객구분 메서드
     get isUnknown(){return false;}
 }
-class unknownCustomer{
+//미확인 고객 전용 클래스
+class UnknownCustomer{
     get isUnknown(){return true;}
 }
-
+//한번에 클래스 사용하도록 하기 부담됨, 임시로 수정할 코드들을 함수로 모아둠
+function isUnknown(arg){
+    if(!((arg instanceof Customer) || (arg === "미확인 고객")))
+        throw new Error(`잘못된 값과 비교 : <${arg}>`);
+    return (arg === "미확인 고객");
+}
 
 //클라리언트1이라고 가정
 function client1(){
