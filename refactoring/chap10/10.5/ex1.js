@@ -15,8 +15,9 @@ class Customer{
 //미확인 고객 전용 클래스
 class UnknownCustomer{
     get isUnknown(){return true;}
-    //특이 케이스 검사를 일반적인 기본값으로 대체할 수 있다.
     get name(){return "거주자";}
+    get buillingPlan(){return registry.buillingPlans.basic;}
+    set buillingPlan(arg){/*무시*/}
 }
 //"미확인 고객" 문자열 확인하는 코드가 사라짐
 function isUnknown(arg){
@@ -25,20 +26,13 @@ function isUnknown(arg){
     return arg.isUnknown;
 }
 function client1(){
-    /*
-    const aCustomer = site.customer;
-    let customerName;
-    if(isUnknown(aCustomer)) customerName = "거주자"; 
-    */
     const aCustomer = aCustomer.name;
 }
-function client2(){
-    const plan = (isUnknown(aCustomer))
-        ? registry.buillingPlans.basic
-        : aCustomer.buillingPlan;
+function client2(){//읽는 경우
+    const plan = aCustomer.buillingPlan;
 }
-function client3(){
-    if(!isUnknown(aCustomer)) aCustomer.buillingPlan = newPlan;
+function client3(){//쓰는 경우
+    aCustomer.buillingPlan = newPlan;
 }
 function client4(){
     const weeksDelinquent = (isUnknown(aCustomer))
