@@ -15,7 +15,12 @@ class UnknownCustomer{
     get name(){return "거주자";}
     get buillingPlan(){return registry.buillingPlans.basic;}
     set buillingPlan(arg){/*무시*/}
+    get paymentHistory(){return new NullPaymentHistory();}
 }
+class NullPaymentHistory{
+    get weeksDelinquentInLastYear(){return 0;}
+}
+
 function isUnknown(arg){
     if (!(arg instanceof Customer || arg instanceof UnknownCustomer))
         throw new Error(`잘못된 값과 비교 <${arg}>`);
@@ -31,7 +36,5 @@ function client3(){
     aCustomer.buillingPlan = newPlan;
 }
 function client4(){
-    const weeksDelinquent = (isUnknown(aCustomer))
-        ? 0
-        : aCustomer.paymentHistory.weeksDelinquentInLastYear;
+    const weeksDelinquent = aCustomer.paymentHistory.weeksDelinquentInLastYear;
 }
