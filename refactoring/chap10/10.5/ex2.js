@@ -1,23 +1,21 @@
-//고객 정보를 갱신하는 클라이언트가 없음
 class Site{
     get customer(){return this._customer;}
 }
-// isUnknown 게터 정의 및 리터럴 객체 생성
+//이제 조건 검사하는 코드를 클래스로 옮긴다.
 class Customer{
     get name(){}
     get billingPlan(){}
     set billingPlan(arg){}
     get paymentHistory(){}
-    get isUnknown(){return false;}
+    get isUnknown(){return (this._customer === "미확인 고객")?createUnknownCustomer():this._customer;}
 }
 function createUnknownCustomer(){
     return {
         isUnknown : true,
     };
 }
-//특이 케이스 조건 검사 부분 함수로 추출, 및 사용
 function isUnknown(arg){
-    return (arg === "미확인 고객");
+    return arg.isUnknown;
 }
 
 function client1(){
