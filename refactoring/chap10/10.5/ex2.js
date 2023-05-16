@@ -2,11 +2,18 @@
 class Site{
     get customer(){return this._customer;}
 }
+// isUnknown 게터 정의 및 리터럴 객체 생성
 class Customer{
     get name(){}
     get billingPlan(){}
     set billingPlan(arg){}
     get paymentHistory(){}
+    get isUnknown(){return false;}
+}
+function createUnknownCustomer(){
+    return {
+        isUnknown : true,
+    };
 }
 function client1(){
     const aCustomer = site.customer;
