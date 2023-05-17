@@ -25,19 +25,17 @@ function client1(){
     const site = enrichSite(rawSite);
     const aCustomer = site.customer;
     //여러 코드...
-    let customerName;
-    if(isUnknown(aCustomer)) customerName = "거주자";
-    else customerName = aCustomer.name;
-
-    function enrichSite(inputSite){
-        const result = _.cloneDeep(inputSite);
-        const unknownCustomer = {
-            isUnknown: true,
-        };
-        if(isUnknown(result.customer)) result.customer = unknownCustomer;
-        else result.customer.isUnknown =false;
-        return result;
-    }
+    const customerName = aCustomer.name;
+}
+function enrichSite(inputSite){
+    const result = _.cloneDeep(inputSite);
+    const unknownCustomer = {
+        isUnknown: true,
+        name: "거주자", //이름 옮기기
+    };
+    if(isUnknown(result.customer)) result.customer = unknownCustomer;
+    else result.customer.isUnknown =false;
+    return result;
 }
 //변환함수 고려한 수정
 function isUnknown(aCustomer){
