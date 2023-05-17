@@ -31,22 +31,20 @@ function enrichSite(inputSite){
     const result = _.cloneDeep(inputSite);
     const unknownCustomer = {
         isUnknown: true,
-        name: "거주자", //이름 옮기기
+        name: "거주자",
+        billingPlan :registry.billingPlans.basic, // 요금제 옮기기
     };
     if(isUnknown(result.customer)) result.customer = unknownCustomer;
     else result.customer.isUnknown =false;
     return result;
 }
-//변환함수 고려한 수정
 function isUnknown(aCustomer){
     if (aCustomer === "미확인 고객") return true;
     else return aCustomer.isUnknown;
 }
 
 function client2(){
-    const plan = isUnknown(aCustomer)
-        ? registry.billingPlans.basic
-        : aCustomer.billingPlan;
+    const plan = aCustomer.billingPlan;
 }
 function client3(){
     const weeksDelinquent = isUnknown(aCustomer)
