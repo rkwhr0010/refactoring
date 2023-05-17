@@ -3,19 +3,14 @@ function eaxmple(){
 }
 //함수로 추출
 function checkForMiscreants(people) {
-    let found = false;
     for (const p of people) {
-        if (!found) {
-            if (p === "조커") {
-                sendAlert();
-                // found = true;
-                return;
-            }
-            if (p === "사루만") {
-                sendAlert();
-                // found = true;
-                return;
-            }
+        if (p === "조커") {
+            sendAlert();
+            return;
+        }
+        if (p === "사루만") {
+            sendAlert();
+            return;
         }
     }
 }
