@@ -32,7 +32,10 @@ function enrichSite(inputSite){
     const unknownCustomer = {
         isUnknown: true,
         name: "거주자",
-        billingPlan :registry.billingPlans.basic, // 요금제 옮기기
+        billingPlan :registry.billingPlans.basic, 
+        paymentHistory : {
+            weeksDeliquentInLastYear : 0,
+        },
     };
     if(isUnknown(result.customer)) result.customer = unknownCustomer;
     else result.customer.isUnknown =false;
@@ -47,7 +50,5 @@ function client2(){
     const plan = aCustomer.billingPlan;
 }
 function client3(){
-    const weeksDelinquent = isUnknown(aCustomer)
-        ? 0 
-        : aCustomer.paymentHistory.weeksDeliquentInLastYear;
+    const weeksDelinquent = aCustomer.paymentHistory.weeksDeliquentInLastYear;
 }
