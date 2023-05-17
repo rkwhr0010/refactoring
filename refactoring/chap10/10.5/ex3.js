@@ -29,7 +29,6 @@ function client1(){
     if(isUnknown(aCustomer)) customerName = "거주자";
     else customerName = aCustomer.name;
 
-    //변환함수 보강
     function enrichSite(inputSite){
         const result = _.cloneDeep(inputSite);
         const unknownCustomer = {
@@ -40,8 +39,10 @@ function client1(){
         return result;
     }
 }
+//변환함수 고려한 수정
 function isUnknown(aCustomer){
-    return aCustomer === "미확인 고객";
+    if (aCustomer === "미확인 고객") return true;
+    else return aCustomer.isUnknown;
 }
 
 function client2(){
