@@ -21,13 +21,20 @@ const record2 ={
 }
 //클라이언트1
 function client1(){
-    const site = acquireSiteData();
+    const rawSite = acquireSiteData();
+    const site = enrichSite(rawSite);
     const aCustomer = site.customer;
     //여러 코드...
     let customerName;
     if(aCustomer === "미확인 고객") customerName = "거주자";
     else customerName = aCustomer.name;
+
+    function enrichSite(inputSite){
+        return _.cloneDeep(inputSite);
+    }
 }
+
+
 function client2(){
     const plan = (aCustomer === "미확인 고객")
         ? registry.billingPlans.basic
@@ -38,5 +45,3 @@ function client3(){
         ? 0 
         : aCustomer.paymentHistory.weeksDeliquentInLastYear;
 }
-
-
