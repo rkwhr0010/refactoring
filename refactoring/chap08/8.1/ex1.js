@@ -1,16 +1,12 @@
 function trackSummary(points){
     const totalTime = calculateTime();
-    const totalDistance = calculateDistance();
+    const totalDistance = top_calculateDistance();
     const pace = totalTime / 60 / totalDistance;
     return {
         time : totalTime,
         distance : totalDistance,
         pace : pace,
     };
-    //복사 함수를 호출하도록 수정한다.
-    function calculateDistance() { //총 거리 계산
-        return top_calculateDistance(points);
-    }
     function calculateTime() {/* 총 시간 계산 */} 
 }
 function top_calculateDistance(points) { 
