@@ -1,6 +1,6 @@
 function trackSummary(points){
     const totalTime = calculateTime();
-    const totalDistance = top_calculateDistance();
+    const totalDistance = totalDistance();//적절한 이름으로 변경
     const pace = totalTime / 60 / totalDistance;
     return {
         time : totalTime,
@@ -9,13 +9,12 @@ function trackSummary(points){
     };
     function calculateTime() {/* 총 시간 계산 */} 
 }
-function top_calculateDistance(points) { 
+function totalDistance(points) { 
     let result = 0;
     for(let i = 1; i < points.length ; i++){
         result += distance(points[i-1], points[i]);
     }
     return result;
-    //top_calculateDistance()함수도 똑같이 옮겨준다.
     function distance(p1, p2) {
         const EARTH_RADIUS = 3959; // 단위 마일
         const dLat = radians(p2.lat) - radians(p1.lat);
