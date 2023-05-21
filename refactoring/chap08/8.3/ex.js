@@ -9,9 +9,15 @@ function renderPerson(outStream, person){
 function photoDiv(p){
     return [
         "<div>",
-        `<p>제목: ${p.title}</p>`,
-        emitPhotoData(p),
+        zznew(p),
         "</div>",
+    ].join("\n");
+}
+//중복 제거를 위해 함수 추출
+function zznew(p){
+    return [
+        `<p>제목: ${p.title}</p>`,
+        emitPhotoData(p) ,
     ].join("\n");
 }
 function emitPhotoData(aPhoto){
