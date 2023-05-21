@@ -12,7 +12,6 @@ function photoDiv(aPhoto){
         "</div>",
     ].join("\n");
 }
-//함수 이름 바꾸기로 마무리
 function emitPhotoData(aPhoto){
     return [
         `<p>제목: ${aPhoto.title}</p>`,
