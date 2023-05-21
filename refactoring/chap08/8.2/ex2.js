@@ -6,8 +6,11 @@ class Account{
     }
     get interestRate(){return this._interestRate;}
 }
+//interestRate 이자율 필드 생성 및 접근자 추가
 class AccountType{
-    constructor(nameString){
-        this.name = nameString;
+    constructor(nameString, interestRate){
+        this._name = nameString;
+        this._interestRate = interestRate;
     }
+    get interestRate(){return this._interestRate;}
 }
