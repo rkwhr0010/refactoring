@@ -2,6 +2,8 @@ class Account{
     constructor(number, type, interestRate){
         this._number = number;
         this._type = type;
+        //어셔션 추가한 상태로 당분간 운영하기
+        assert(interestRate === this._type.interestRate);
         this._interestRate = interestRate;
     }
     get interestRate(){return this._interestRate;}
