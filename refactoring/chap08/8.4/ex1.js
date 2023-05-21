@@ -4,6 +4,7 @@ function renderPerson(outStream, person){
     emitPhotoData(outStream, person.photo);
     outStream.write(`<p>위치: ${photo.location}</p>\n`);
 }
+//기존 emitPhotoData제거 후 새 함수 이름 emitPhotoData로 변경
 function listRecentPhotos(outStream, photos){
     photos
         .filter(p=>p.date > recentDateCutoff())
