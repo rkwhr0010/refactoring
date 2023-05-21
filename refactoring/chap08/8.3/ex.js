@@ -5,18 +5,18 @@ function renderPerson(outStream, person){
     result.push(emitPhotoData(person.photo));
     return result.join("\n");
 }
-function photoDiv(p){
+function photoDiv(aPhoto){
     return [
         "<div>",
-        emitPhotoData(p),
+        emitPhotoData(aPhoto),
         "</div>",
     ].join("\n");
 }
 //함수 이름 바꾸기로 마무리
-function emitPhotoData(p){
+function emitPhotoData(aPhoto){
     return [
-        `<p>제목: ${p.title}</p>`,
-        `<p>위치: ${p.location}</p>` ,
-        `<p>날짜: ${p.date.toDateString()}</p>`,
+        `<p>제목: ${aPhoto.title}</p>`,
+        `<p>위치: ${aPhoto.location}</p>` ,
+        `<p>날짜: ${aPhoto.date.toDateString()}</p>`,
     ].join("\n");
 }
