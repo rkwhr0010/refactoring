@@ -2,8 +2,8 @@ function renderPerson(outStream, person){
     const result = [];
     result.push(`<p>${person.name}</p>`);
     result.push(renderPhoto(person.photo));
-    result.push(`<p>제목: ${person.photo.title}</p>`);
-    result.push(emitPhotoData(person.photo));
+    //추가 중복 제거
+    result.push(zznew(person.photo));
     return result.join("\n");
 }
 function photoDiv(p){
@@ -13,7 +13,6 @@ function photoDiv(p){
         "</div>",
     ].join("\n");
 }
-//중복 제거를 위해 함수 추출
 function zznew(p){
     return [
         `<p>제목: ${p.title}</p>`,
