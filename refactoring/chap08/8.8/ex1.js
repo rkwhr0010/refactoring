@@ -1,14 +1,15 @@
 function acquireData(input){
     const lines = input.split("\n");
-    let firstLine = true;
+    // let firstLine = true;
     const result = [];
-    //먼저 루프 변수를 새로 만든다.
-    const loopItems = lines;
+    //로직을 진적으로 대체하면서 테스트한다.
+    const loopItems = lines
+        .slice(1);
     for(const line of loopItems){
-        if(firstLine){
-            firstLine = false;
-            continue;
-        }
+        // if(firstLine){
+        //     firstLine = false;
+        //     continue;
+        // }
         if(line.trim() === "") continue;
         const record = line.split(",");
         if(record[1].trim() === "India"){
