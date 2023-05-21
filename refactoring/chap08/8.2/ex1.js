@@ -1,12 +1,12 @@
 class Customer{
+    //계약 인스턴스를 사용하도록 수정
     constructor(name, discountRate){
         this._name = name;
-        this._setDiscountRate(discountRate);
         this._contract = new CustomerContract(dateToday());
+        this._setDiscountRate(discountRate);
     }
-    get discountRate(){return this._discountRate;}
-    //먼저 변수 캡슐화부터
-    _setDiscountRate(aNumber){this._discountRate = aNumber;}
+    get discountRate(){return this._contract.discountRate;}
+    _setDiscountRate(aNumber){this._contract.discountRate = aNumber;}
 
     becomePreferred(){
         this._setDiscountRate(this._discountRate +0.03);
@@ -16,7 +16,6 @@ class Customer{
         return amount.subtract(amount.multiply(this._discountRate));
     }
 }
-//필드와 접근자 추가
 class CustomerContract{
     constructor(startDate,discountRate){
         this._startDate = startDate;
