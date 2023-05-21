@@ -1,10 +1,9 @@
 function trackSummary(points){
     const totalTime = calculateTime();
-    const totalDistance = totalDistance();//적절한 이름으로 변경
-    const pace = totalTime / 60 / totalDistance;
-    return {
+    const pace = totalTime / 60 / totalDistance();
+    return {//적절한 이름으로 변경 후 인라인
         time : totalTime,
-        distance : totalDistance,
+        distance : totalDistance(),
         pace : pace,
     };
     function calculateTime() {/* 총 시간 계산 */} 
