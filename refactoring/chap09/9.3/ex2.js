@@ -5,7 +5,7 @@ class ProductionPlan {
         this._adjustments = [];
     }
     get production(){
-        assert(this._productionAccumulator + this.calculatedProductionAccumulator);
+        assert(this._productionAccumulator === this.calculatedProductionAccumulator);
         return this._initialProduction + this._productionAccumulator;
     }
     get calculatedProductionAccumulator(){
