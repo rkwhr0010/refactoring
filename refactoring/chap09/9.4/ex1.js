@@ -2,10 +2,11 @@ class Person{
     constructor(){
         this._telephoneNumber = new TelephoneNumber();
     }
+    //접근자는 항상 새로운 불변객체를 리턴하게 된다.
     get officeAreaCode(){return this._telephoneNumber.areaCode;}
-    set officeAreaCode(arg){this._telephoneNumber.areaCode = arg;}
+    set officeAreaCode(arg){this._telephoneNumber = new TelephoneNumber(areaCode, this.officeNumber);}
     get officeNumber(){return this._telephoneNumber.officeNumber;}
-    set officeNumber(arg){this._telephoneNumber.officeNumber = arg;}
+    set officeNumber(arg){this._telephoneNumber = new TelephoneNumber(this.officeAreaCode, arg);}
 }
 
 class TelephoneNumber{
