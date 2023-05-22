@@ -1,4 +1,3 @@
-//아직 전화번호가 올바로 설정되지 못하게 짜여 있다고 가정
 class Person{
     constructor(){
         this._telephoneNumber = new TelephoneNumber();
@@ -10,8 +9,11 @@ class Person{
 }
 
 class TelephoneNumber{
+    //불변으로 만들기 위해 세터 제거 후 생성자로만 받는다.
+    constructor(areaCode, number){
+        this._areaCode = areaCode;
+        this._number = number;
+    }
     get areaCode(){return this._areaCode;}
-    set areaCode(arg){this._areaCode = arg;}
     get number(){return this._number;}
-    set number(arg){this._number = arg;}
 }
