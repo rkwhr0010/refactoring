@@ -1,7 +1,7 @@
-const organization = {name: "애크미 구스베리",country:"GB"};
+//호출하는 곳 수정
+const organization = new Organization({title: "애크미 구스베리",country:"GB"});
 class Organization{
     constructor(data){
-        //생성자 조정
         this._title = (data.title !== undefined) ? data.title : data.name;
         this._country = data.country;
     }
