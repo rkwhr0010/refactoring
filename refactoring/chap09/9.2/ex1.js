@@ -4,8 +4,8 @@ class Organization{
         this._title =  data.title;
         this._country = data.country;
     }
-    get name(){return this._title;}
-    set name(arg){ this._title = arg;}
+    get title(){return this._title;}
+    set title(arg){ this._title = arg;}
     get country(){return this._country;}
     set country(arg){ this._country = arg;}
 }
