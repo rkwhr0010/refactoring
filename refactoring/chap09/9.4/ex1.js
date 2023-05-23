@@ -21,3 +21,7 @@ class TelephoneNumber{
         return Object.keys(this).every(a=>this[a] === other[a]);
     }
 }
+const t1 = new TelephoneNumber("12345","67890");
+const t2 = new TelephoneNumber("12345","67890");
+
+console.log(t1.equals(t2));
