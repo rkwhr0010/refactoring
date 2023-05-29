@@ -11,17 +11,11 @@ function alertForMiscreant(people){
     }
     return "";
 }
-//함수 복제 후 질의 목적에 맞는 이름 짓기
+//부수효과 제거
 function findMiscreant(people){
     for(const p of people){
-        if(p==="조커"){
-            setOffAlarms();
-            return "조커";
-        }
-        if(p==="사루만"){
-            setOffAlarms();
-            return "사루만";
-        }
+        if(p==="조커") return "조커";
+        if(p==="사루만") return "사루만";
     }
     return "";
 }
