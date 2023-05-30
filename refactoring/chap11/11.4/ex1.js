@@ -10,8 +10,8 @@ class HeatingPlan{
         return (bottom >= this._temperatureRange.low)
             && (top <= this._temperatureRange.high);
     }
-    //기존 메서드 대체할 빈 메서드 생성
+    //기존 메서드 호출코드 추가
     xxNEWwithinRange(aNumberRange){
-
+        return this.withinRange(aNumberRange.low, aNumberRange.high);
     }
 }
