@@ -1,4 +1,3 @@
-//지나치게 까다로워 고치려면 일이 커질 것 같으면 래핑하는 함수도 고려할만 하다.
 function rushDeliveryDate(anOrder) {return deliveryDateHelperOnly(anOrder, true);}
 function regularDeliveryDate(anOrder) {return deliveryDateHelperOnly(anOrder, false);}
 
