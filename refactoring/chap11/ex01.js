@@ -1,15 +1,5 @@
 function alertForMiscreant(people){
-    for(const p of people){
-        if(p==="조커"){
-            setOffAlarms();
-            return "조커";
-        }
-        if(p==="사루만"){
-            setOffAlarms();
-            return "사루만";
-        }
-    }
-    return "";
+    if(findMiscreant(people)!=="") setOffAlarms();
 }
 function findMiscreant(people){
     for(const p of people){
@@ -20,4 +10,5 @@ function findMiscreant(people){
 }
 //원래 함수 호출하던 곳, 새로 만든 질의함수로 바꾸기
 // const found = alertForMiscreant(people);
-const found = findMiscreant(people);
+const found = findMiscreant(people); //질의
+alertForMiscreant(people);//명령
