@@ -1,13 +1,6 @@
-//호출하는 곳 1
-aShipment.deliveryDate = deliveryDate(anOrder, true);
-//다른 어딘가 호출하는 곳2
-aShipment.deliveryDate = deliveryDate(anOrder, false);
-
-//함수 추출하기로 조건문 분해
-function deliveryDate(anOrder, isRush){
-    if(isRush) return rushDeliveryDate(anOrder);
-    else return regularDeliveryDate(anOrder);
-}
+//목적을 더 잘 드러낸다.
+aShipment.deliveryDate = rushDeliveryDate(anOrder);
+aShipment.deliveryDate = regularDeliveryDate(anOrder);
 
 function regularDeliveryDate(anOrder) {
     let deliveryTime;
