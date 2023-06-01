@@ -1,5 +1,6 @@
 function charge(customer, usage, provider){
-    return new ChargeCalculator(customer, usage, provider).charge;
+    return new ChargeCalculator(customer, usage, provider)
+        .charge(customer, usage, provider);
 }
 class ChargeCalculator{
     constructor(customer, usage, provider){
