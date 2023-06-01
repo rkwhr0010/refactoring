@@ -7,12 +7,9 @@ class ChargeCalculator{
         this._usage = usage;
         this._provider = provider;
     }
-    get baseCharge(){
-        return this._customer.baseRate * this._usage;
-    }
-    //보조함수 제거하기,먼저 로컬 변수로 추출
+    //보조함수 제거하기, 함수 인라인 하기
     get charge(){
-        const baseCharge = this.baseCharge;
+        const baseCharge = this._customer.baseRate * this._usage;
         return baseCharge + this._provider.connectionCharge;
     }
 }
