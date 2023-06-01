@@ -1,22 +1,24 @@
 function score(candidate, medicalExam, scoringGuide){
-    return new Score(candidate).execute(medicalExam,scoringGuide);
+    return new Score(candidate,medicalExam,scoringGuide).execute();
 }
-//클래스를 만들고 함수 옮기기
+//명령 매개변수 최대한 생성자로 옮기기
 class Score{
-    constructor(candidate){
+    constructor(candidate,medicalExam,scoringGuide){
         this._candidate = candidate;
+        this._medicalExam = medicalExam;
+        this._scoringGuide = scoringGuide;
     }
-    execute(medicalExam, scoringGuide){
+    execute(){
         let result = 0;
         let healthLevel = 0;
         let highMedicalRiskFlag = false;
     
-        if(medicalExam.isSmoker){
+        if(this._medicalExam.isSmoker){
             healthLevel += 10;
             highMedicalRiskFlag =true;
         }
         let certificationGrade = "regular";
-        if(scoringGuide.stateWithLowCertification(candidate.originState)){
+        if(this._scoringGuide.stateWithLowCertification(this._candidate.originState)){
             certificationGrade = "low";
             result -= 5;
         }
