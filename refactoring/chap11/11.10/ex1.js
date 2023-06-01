@@ -1,16 +1,15 @@
 function charge(customer, usage, provider){
-    return new ChargeCalculator(customer, usage, provider)
+    return new ChargeCalculator(usage, provider)
         .charge(customer, usage, provider);
 }
 class ChargeCalculator{
-    constructor(customer, usage, provider){
-        this._customer = customer;
+    constructor(usage, provider){
         this._usage = usage;
         this._provider = provider;
     } 
-    //함수로 변경하기 위에 함수 포맷에 맞게 함수 선언 바꾸기 적용
+    //인스턴스 변수를 하나씩 점진적으로 제거하면서 매개변수를 사용하도록 수정
     charge(customer, usage, provider){
-        const baseCharge = this._customer.baseRate * this._usage;
+        const baseCharge = customer.baseRate * this._usage;
         return baseCharge + this._provider.connectionCharge;
     }
 }
