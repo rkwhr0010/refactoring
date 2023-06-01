@@ -1,4 +1,3 @@
-//가장 먼저 팩터리 함수 작성
 function createEmployee(name, typeCode){
     return new Employee(name,typeCode);
 }
@@ -16,5 +15,5 @@ class Employee{
         return {"E" : "Engineer","M":"Manager","S":"Salesperson"};
     }
 }
-//클라이언트
-const candidate = new Employee(document.name, document.empType);
+//클라이언트, 생성자 호출 코드 대체
+const candidate = createEmployee(document.name, document.empType);
