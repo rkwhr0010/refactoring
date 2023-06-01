@@ -7,16 +7,12 @@ class Score{
         this._medicalExam = medicalExam;
         this._scoringGuide = scoringGuide;
     }
-    //더 가다듬기, 명령의 목적인 복잡한 함수를 잘게 쪼게기 시작
     execute(){
         this._result = 0;
         this._healthLevel = 0;
         this._highMedicalRiskFlag = false;
     
-        if(this._medicalExam.isSmoker){
-            this._healthLevel += 10;
-            this._highMedicalRiskFlag =true;
-        }
+        this.scoreSmoking();
         let certificationGrade = "regular";
         if(this._scoringGuide.stateWithLowCertification(this._candidate.originState)){
             certificationGrade = "low";
@@ -25,5 +21,13 @@ class Score{
         //많은 코드...
         this._result -= Math.max(this._healthLevel -5 , 0);
         return result;
+
+    }
+    //이렇게 쪼게놓으면 디버깅이 훨씬 쉬워진다.(디버깅 포인트가 더욱 촘촘해짐)
+    scoreSmoking() {
+        if (this._medicalExam.isSmoker) {
+            this._healthLevel += 10;
+            this._highMedicalRiskFlag = true;
+        }
     }
 }
