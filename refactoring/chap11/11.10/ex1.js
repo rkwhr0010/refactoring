@@ -1,4 +1,3 @@
-//클래스를 생성하고 호출하는 함수 만들기
 function charge(customer, usage, provider){
     return new ChargeCalculator(customer, usage, provider).charge;
 }
@@ -11,8 +10,10 @@ class ChargeCalculator{
     get baseCharge(){
         return this._customer.baseRate * this._usage;
     }
+    //보조함수 제거하기,먼저 로컬 변수로 추출
     get charge(){
-        return this.baseCharge + this._provider.connectionCharge;
+        const baseCharge = this.baseCharge;
+        return baseCharge + this._provider.connectionCharge;
     }
 }
 //호출자...
