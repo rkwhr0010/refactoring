@@ -6,9 +6,9 @@ class ChargeCalculator{
         this._customer = customer;
         this._usage = usage;
         this._provider = provider;
-    }
-    //보조함수 제거하기, 함수 인라인 하기
-    get charge(){
+    } 
+    //함수로 변경하기 위에 함수 포맷에 맞게 함수 선언 바꾸기 적용
+    charge(customer, usage, provider){
         const baseCharge = this._customer.baseRate * this._usage;
         return baseCharge + this._provider.connectionCharge;
     }
