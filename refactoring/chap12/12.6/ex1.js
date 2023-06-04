@@ -8,12 +8,11 @@ function createEmployee(name, type){
 }
 
 class Employee{
+    //모든 서브클래스에서 재정의한 필드와 게터제거
     constructor(name, type){
         this.validateType(type);
         this._name = name;
-        this._type = type;
     }
-    get tpye(){return this._type;}
     validateType(arg){
         if(!["engineer","manager","salesperson"].includes(arg))
             throw new Error(`${arg}라는 직운 유형은 없습니다.`);
