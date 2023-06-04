@@ -1,3 +1,11 @@
+//생성자를 팩터리 함수로 대체
+function createEmployee(name, type){
+    switch(tpye){
+        case "engineer" : return new Engineer(name,type);
+    }
+    return new Employee(name, type);
+}
+
 class Employee{
     constructor(name, type){
         this.validateType(type);
