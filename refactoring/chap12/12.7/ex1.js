@@ -1,24 +1,17 @@
-//직관적으로 생성자 마다 팩터리 메서드를 만들 경우
-function createPerson(name){
-    return new Person(name);
+//생성할 클래스를 선택하는 로직을 함수로 추출하는 것이 더 낫다.
+function createPerson(aRecord){
+    let p;
+    switch (aRecord.gender){
+        case 'M' : p = new Male(aRecord.name); break;
+        case 'F' : p = new Female(aRecord.name); break;
+        default : p = new Person(aRecord.name); 
+    }
+    return p;
 }
-function createMale(name){
-    return new Male(name);
-}
-function createFemale(name){
-    return new Female(name);
-}
-//결국, 리팩터링하면 큰 의미가 없다.
 function loadFromInput(data){
     const result = [];
     data.forEach(aRecord=>{
-        let p;
-        switch (aRecord.gender){
-            case 'M' : p = new Male(aRecord.name); break;
-            case 'F' : p = new Female(aRecord.name); break;
-            default : p = new Person(aRecord.name); 
-        }
-        result.push(p);
+        result.push(createPerson(aRecord));
     });
     return result;
 }
