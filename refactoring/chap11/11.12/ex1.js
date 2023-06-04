@@ -10,6 +10,8 @@ function calculateShippingCosts(anOrder){
     if(shippingRules < 0) return shippingRules; //오류 전파
     //코드들...
 }
-
-const status = calculateShippingCosts(orderData);
+//최상위
+try {//최상위 예외 핸들러를 만든다.
+    const status = calculateShippingCosts(orderData);
+} catch (error) {/*예외처리*/}
 if(status < 0) errorList.push({order:orderData, errorCode:statuts});
