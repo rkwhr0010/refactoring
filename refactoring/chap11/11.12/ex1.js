@@ -11,7 +11,8 @@ function calculateShippingCosts(anOrder){
     //코드들...
 }
 //최상위
-try {//최상위 예외 핸들러를 만든다.
-    const status = calculateShippingCosts(orderData);
+let status; //스코프 문제로 선언과 초기화를 어쩔 수 없이 분리
+try {
+    status = calculateShippingCosts(orderData);
 } catch (error) {/*예외처리*/}
 if(status < 0) errorList.push({order:orderData, errorCode:statuts});
