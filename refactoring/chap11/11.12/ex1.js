@@ -8,7 +8,8 @@ function localShippingRules(country){//country 는 항상 유효함을 가정
 function calculateShippingCosts(anOrder){
     //코드들...
     const shippingRules = localShippingRules(anOrder.country);
-    if(shippingRules < 0) return shippingRules; //오류 전파
+    //이 상태로 두고 아직 오류 코드를 다 못처리한 부분있는지 테스트
+    if(shippingRules < 0) return new Error("오류 코드가 다 사라지지 않았습니다.");
     //코드들...
 }
 //최상위
