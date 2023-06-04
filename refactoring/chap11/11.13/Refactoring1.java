@@ -12,14 +12,9 @@ public class Refactoring1 {
 		private List<Resource> allocated;
 		
 		public Resource get() {
-			Resource result;
-			if(available.isEmpty()) {
-				result = Resource.create();
-				allocated.add(result);
-			}else {
-				result = available.pop();
-				allocated.add(result);
-			}
+			//더 다듬기
+			Resource result = available.isEmpty()? Resource.create():available.pop();
+			allocated.add(result);
 			return result;
 		}
 	}
