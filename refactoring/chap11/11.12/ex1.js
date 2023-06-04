@@ -1,7 +1,8 @@
 function localShippingRules(country){//country 는 항상 유효함을 가정
     const data = countryData.shippingRules[country];
     if(data) return new shippingRules(data);
-    else return -23; //오류
+    //오류 코드 대신 예외를 던진다.
+    else return new OrderProcessingError(-23);
 }
 
 function calculateShippingCosts(anOrder){
