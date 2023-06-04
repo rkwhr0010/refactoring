@@ -16,14 +16,14 @@ class Manager extends EmployeeType{
 class Employee{
     constructor(name,type){
         this._name = name;
-        this._type = type;
+        this._type = this.createEmployeeType(type);
     }
     static createEmployeeType(aString){
         switch(aString){
             case "engineer" : return new Engineer();
             case "salesperson" : return new Salesperson();
             case "manager" : return new Manager();
-            default : throw new Error(`${aString}라는 직운 유형은 없습니다.`);
+            default : throw new Error(`${aString}라는 직원 유형은 없습니다.`);
         }
     }
     get typeString() {return this._type.toString();}
