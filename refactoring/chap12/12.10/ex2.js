@@ -13,12 +13,21 @@ class Bird{
     constructor(data){
         this._name = data.name;
         this._plumage = data.plumage;
+        this._speciesDelegate = this.selectSpeciesDelegate(data);
     }
+    //위임을 처리할 메서드 생성
+    selectSpeciesDelegate(data){
+        switch(data.type){
+            case "유럽 제비" :
+                return new EuropeanSwallowDelegate();
+            default: return null;
+        }
+    }
+
     get name(){return this._name;}
     get plumage(){return this._plumage || "보통이다";}
     get airSpeedVelocity(){return null;}
 }
-//EuropeanSwallow부터 시작, 빈 위임 클래스 생성
 class EuropeanSwallowDelegate{
 
 }
