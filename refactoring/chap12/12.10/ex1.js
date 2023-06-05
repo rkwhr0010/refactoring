@@ -1,9 +1,11 @@
-//생성자를 팩터리 함수로 변경해 캡슐화
 function createBooking(show, date){
     return new Booking(show, date);
 }
+//프리미엄 예약을 대체할 새로운 위임을 연결
 function createPremiumBooking(show, date, extras){
-    return new PremiumBooking(show, date, extras);
+    const result = new PremiumBooking(show, date, extras);
+    result._bePremium(extras);
+    return result;
 }
 
 
@@ -20,7 +22,12 @@ class Booking{
         if(this.isPeakDay) result += Math.round(result * 0.15);
         return result;
     }
+    //이메서드가 private이라는 의미로 _ 붙임
+    _bePremium(extras){
+        this._premiumDelegate = new PremiumBookingDelegate(this, extras);
+    }
 }
+
 class PremiumBooking extends Booking{
     constructor(show, date, extras){
         super(show, date);
