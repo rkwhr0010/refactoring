@@ -5,7 +5,6 @@ function createBird(data){
         default : return new Bird(data);
     }
 }
-//노르웨이 제비도 같은 작업 수행
 class Bird{
     constructor(data){
         this._name = data.name;
@@ -24,7 +23,16 @@ class Bird{
         }
     }
     get name(){return this._name;}
-    get plumage(){return this._plumage || "보통이다";}
+
+    //plumage() 분배 처리 문제 2
+    //instanceof 연산자를 사용해 특정 클래스만 검사하는 것은 악취나는 코드다.
+    get plumage(){
+        if(this._speciesDelegate instanceof NorwegianBlueParrotDelegate) 
+            return this._speciesDelegate.plumage;
+        else 
+            return this._plumage || "보통이다";
+    }
+
     get airSpeedVelocity(){
         return (this._speciesDelegate)
             ? this._speciesDelegate.airSpeedVelocity
@@ -43,9 +51,8 @@ class AfricanSwallowDelegate{
     }
 }
 class NorwegianBlueParrotDelegate{
-    //plumage() 옮기기, 오버라이드 메서드로 역참조 필요
     constructor(data, bird){
-        this._bird = bird;//역참조
+        this._bird = bird;
         this._voltage = data.voltage;
         this._isNailed = data.isNailed;
     }
