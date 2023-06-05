@@ -17,7 +17,7 @@ class Bird{
             case "유럽 제비" :
                 return new EuropeanSwallowDelegate();
             case "아프리카 제비" :
-                return new AfricanSwallowDelegate();
+                return new AfricanSwallowDelegate(data);
             case '노르웨이 제비' :
                 return new NorwegianBlueParrotDelegate(data);
             default: return null;
@@ -43,12 +43,18 @@ class AfricanSwallowDelegate{
     }
 }
 class NorwegianBlueParrotDelegate{
-    constructor(data){
+    //plumage() 옮기기, 오버라이드 메서드로 역참조 필요
+    constructor(data, bird){
+        this._bird = bird;//역참조
         this._voltage = data.voltage;
         this._isNailed = data.isNailed;
     }
     get airSpeedVelocity(){
         return( this._isNailed) ? 0 : 10 + this._voltage / 10;
+    }
+    get plumage(){
+        if(this._voltage>100) return "그을렸다";
+        else return this._bird._plumage || "예쁘다";
     }
 }
 class NorwegianBlueParrot extends Bird{
@@ -58,8 +64,7 @@ class NorwegianBlueParrot extends Bird{
         this._isNailed = data.isNailed;
     }
     get plumage(){
-        if(this._voltage>100) return "그을렸다";
-        else return this._plumage || "예쁘다";
+        return this._speciesDelegate.plumage;
     }
     get airSpeedVelocity(){
         return this._speciesDelegate.airSpeedVelocity;
