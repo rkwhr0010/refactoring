@@ -18,6 +18,10 @@ class Bird{
     get plumage(){return this._plumage || "보통이다";}
     get airSpeedVelocity(){return null;}
 }
+//EuropeanSwallow부터 시작, 빈 위임 클래스 생성
+class EuropeanSwallowDelegate{
+
+}
 class EuropeanSwallow extends Bird{
     get airSpeedVelocity(){return 35;}
 }
