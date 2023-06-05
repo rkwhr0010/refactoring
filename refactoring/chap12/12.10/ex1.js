@@ -2,7 +2,7 @@ function createBooking(show, date){
     return new Booking(show, date);
 }
 function createPremiumBooking(show, date, extras){
-    const result = new PremiumBooking(show, date, extras);
+    const result = new Booking(show, date, extras);
     result._bePremium(extras);
     return result;
 }
@@ -31,16 +31,10 @@ class Booking{
     get hasDinner(){
         return (this._premiumDelegate)
             ? this._premiumDelegate.hasDinner
-            : undefined;
+            : undefined; 
     }
 }
 
-class PremiumBooking extends Booking{
-    constructor(show, date, extras){
-        super(show, date);
-        this._extras = extras;
-    }
-}
 //위임 클래스
 class PremiumBookingDelegate{
     constructor(hostBooking, extras){
