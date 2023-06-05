@@ -1,4 +1,3 @@
-//아프리카 제비 클래스 제거, 관련 코드 정리
 function createBird(data){
     switch(data.type){
         case '노르웨이 제비' :
@@ -6,6 +5,7 @@ function createBird(data){
         default : return new Bird(data);
     }
 }
+//노르웨이 제비도 같은 작업 수행
 class Bird{
     constructor(data){
         this._name = data.name;
@@ -18,8 +18,8 @@ class Bird{
                 return new EuropeanSwallowDelegate();
             case "아프리카 제비" :
                 return new AfricanSwallowDelegate();
-            case '유럽 제비' :
-        return new NorwegianBlueParrot(data);
+            case '노르웨이 제비' :
+                return new NorwegianBlueParrotDelegate(data);
             default: return null;
         }
     }
@@ -34,7 +34,6 @@ class Bird{
 class EuropeanSwallowDelegate{
     get airSpeedVelocity(){return 35;}
 }
-//메서드 옮기기
 class AfricanSwallowDelegate{
     constructor(data){
         this._numberOfCoconuts = data._numberOfCoconuts;
@@ -43,7 +42,15 @@ class AfricanSwallowDelegate{
         return 40 - 2 * this._numberOfCoconuts;
     }
 }
-
+class NorwegianBlueParrotDelegate{
+    constructor(data){
+        this._voltage = data.voltage;
+        this._isNailed = data.isNailed;
+    }
+    get airSpeedVelocity(){
+        return( this._isNailed) ? 0 : 10 + this._voltage / 10;
+    }
+}
 class NorwegianBlueParrot extends Bird{
     constructor(data){
         super(data);
@@ -55,6 +62,6 @@ class NorwegianBlueParrot extends Bird{
         else return this._plumage || "예쁘다";
     }
     get airSpeedVelocity(){
-        return( this._isNailed) ? 0 : 10 + this._voltage / 10;
+        return this._speciesDelegate.airSpeedVelocity;
     }
 }
