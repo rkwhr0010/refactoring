@@ -5,6 +5,8 @@ function createBooking(show, date){
 function createPremiumBooking(show, date, extras){
     return new PremiumBooking(show, date, extras);
 }
+
+
 class Booking{
     constructor(show, date){
         this._show = show;
@@ -32,6 +34,15 @@ class PremiumBooking extends Booking{
     }
     get hasDinner(){
         return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
+    }
+}
+//위임 클래스 만들기
+class PremiumBookingDelegate{
+    constructor(hostBooking, extras){
+        //서브클래스는 super 키워드로 부모 클래스 멤버에 쉽게 접근할 수 있지만,
+        //위임에선 역참조가 필수다.
+        this._host = hostBooking;
+        this._extras =extras;
     }
 }
 
