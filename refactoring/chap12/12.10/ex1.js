@@ -34,7 +34,7 @@ class PremiumBooking extends Booking{
         this._extras = extras;
     }
     get basePrice(){
-        return Math.round(super.basePrice + this._extras.premiumFee);
+        return this._premiumDelegate.basePrice;
     }
     get hasDinner(){
         return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
@@ -48,6 +48,10 @@ class PremiumBookingDelegate{
     }
     get hasTalkback(){
         return this._host._show.hasOwnProperty('talkback');
+    }
+    //super로 부모 메서드 호출하는 부분을 방금과 같은 방식으로 리팩터링하면 무한 재귀에 빠진다.
+    get basePrice(){
+        return Math.round(this._host.basePrice + this._extras.premiumFee);
     }
 }
 
