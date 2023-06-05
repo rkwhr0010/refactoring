@@ -31,9 +31,10 @@ class PremiumBooking extends Booking{
         super(show, date);
         this._extras = extras;
     }
+    /* 위임 메서드가 잘 동작하면, 이제 제거
     get hasTalkback(){
         return this._premiumDelegate.hasTalkback;
-    }
+    }*/
     get basePrice(){
         return Math.round(super.basePrice + this._extras.premiumFee);
     }
