@@ -12,13 +12,19 @@ class Booking{
         this._show = show;
         this._date = date;
     }
-    //위임 사용 로직 반영
     get hasTalkback(){
         return (this._premiumDelegate) 
             ? this._premiumDelegate.hasTalkback 
             : this._show.hasOwnProperty('talkback') && !this.isPeakDay;
     }
+    //해결방안 1
+    //슈퍼 클래스의 계산 로직을 함수로 추출, 가격 계산과 분배 로직 분리
     get basePrice(){
+        return (this._premiumDelegate)
+            ? this._premiumDelegate.basePrice
+            : this._privateBasePrice;
+    }
+    get _privateBasePrice(){
         let result = this._show.price;
         if(this.isPeakDay) result += Math.round(result * 0.15);
         return result;
@@ -34,7 +40,7 @@ class PremiumBooking extends Booking{
         this._extras = extras;
     }
     get basePrice(){
-        return this._premiumDelegate.basePrice;
+        return Math.round(super.basePrice + this._extras.premiumFee);
     }
     get hasDinner(){
         return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
@@ -49,9 +55,8 @@ class PremiumBookingDelegate{
     get hasTalkback(){
         return this._host._show.hasOwnProperty('talkback');
     }
-    //super로 부모 메서드 호출하는 부분을 방금과 같은 방식으로 리팩터링하면 무한 재귀에 빠진다.
     get basePrice(){
-        return Math.round(this._host.basePrice + this._extras.premiumFee);
+        return Math.round(super.basePrice + this._extras.premiumFee);
     }
 }
 
