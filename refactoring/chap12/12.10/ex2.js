@@ -14,9 +14,9 @@ class Bird{
     selectSpeciesDelegate(data){
         switch(data.type){
             case "유럽 제비" :
-                return new EuropeanSwallowDelegate();
+                return new EuropeanSwallowDelegate(this);
             case "아프리카 제비" :
-                return new AfricanSwallowDelegate(data);
+                return new AfricanSwallowDelegate(data,this);
             case '노르웨이 제비' :
                 return new NorwegianBlueParrotDelegate(data,this);
             default: return null;
@@ -24,10 +24,9 @@ class Bird{
     }
     get name(){return this._name;}
 
-    //plumage() 분배 처리 문제 2
-    //instanceof 연산자를 사용해 특정 클래스만 검사하는 것은 악취나는 코드다.
+    //NorwegianBlueParrotDelegate만 특별 취급해보기
     get plumage(){
-        if(this._speciesDelegate instanceof NorwegianBlueParrotDelegate) 
+        if(this._speciesDelegate) 
             return this._speciesDelegate.plumage;
         else 
             return this._plumage || "보통이다";
@@ -39,15 +38,26 @@ class Bird{
             : null;
     }
 }
+//plumage() 기본 메서드가 중복된다. 그리고 역참조를 추가하는 코드도 중복된다.
 class EuropeanSwallowDelegate{
+    constructor(bird){
+        this._bird = bird;
+    }
     get airSpeedVelocity(){return 35;}
+    get plumage(){
+        return this._bird._plumage || "예쁘다";
+    }
 }
 class AfricanSwallowDelegate{
-    constructor(data){
+    constructor(data,bird){
+        this._bird = bird;
         this._numberOfCoconuts = data._numberOfCoconuts;
     }
     get airSpeedVelocity(){
         return 40 - 2 * this._numberOfCoconuts;
+    }
+    get plumage(){
+        return this._bird._plumage || "예쁘다";
     }
 }
 class NorwegianBlueParrotDelegate{
