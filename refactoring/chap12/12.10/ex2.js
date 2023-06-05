@@ -1,7 +1,6 @@
+//유럽 제비 클래스 제거, 관련 코드 정리
 function createBird(data){
     switch(data.type){
-        case '유럽 제비' :
-            return new EuropeanSwallow(data);
         case '아프리카 제비' :
             return new AfricanSwallow(data);
         case '유럽 제비' :
@@ -22,22 +21,16 @@ class Bird{
             default: return null;
         }
     }
-
     get name(){return this._name;}
     get plumage(){return this._plumage || "보통이다";}
-    //분배 메서드 처리
     get airSpeedVelocity(){
         return (this._speciesDelegate)
             ? this._speciesDelegate.airSpeedVelocity
             : null;
     }
 }
-//위임 메서드로 옮김
 class EuropeanSwallowDelegate{
     get airSpeedVelocity(){return 35;}
-}
-class EuropeanSwallow extends Bird{
-    get airSpeedVelocity(){return this._speciesDelegate.airSpeedVelocity;}
 }
 class AfricanSwallow extends Bird{
     constructor(data){
