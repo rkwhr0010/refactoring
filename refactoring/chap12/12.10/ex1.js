@@ -1,3 +1,10 @@
+//생성자를 팩터리 함수로 변경해 캡슐화
+function createBooking(show, date){
+    return new Booking(show, date);
+}
+function createPremiumBooing(show, date, extras){
+    return new PremiumBooking(show, date, extras);
+}
 class Booking{
     constructor(show, date){
         this._show = show;
@@ -27,3 +34,10 @@ class PremiumBooking extends Booking{
         return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
     }
 }
+
+// 클라이언트 (일반 예약)
+aBooking = new Booking(show, date);
+// 클라이언트 (프리미엄 예약)
+aBooking = new PremiumBooking(show, date, extras);
+
+
