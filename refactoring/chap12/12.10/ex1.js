@@ -1,7 +1,6 @@
 function createBooking(show, date){
     return new Booking(show, date);
 }
-//프리미엄 예약을 대체할 새로운 위임을 연결
 function createPremiumBooking(show, date, extras){
     const result = new PremiumBooking(show, date, extras);
     result._bePremium(extras);
@@ -22,7 +21,6 @@ class Booking{
         if(this.isPeakDay) result += Math.round(result * 0.15);
         return result;
     }
-    //이메서드가 private이라는 의미로 _ 붙임
     _bePremium(extras){
         this._premiumDelegate = new PremiumBookingDelegate(this, extras);
     }
@@ -34,7 +32,7 @@ class PremiumBooking extends Booking{
         this._extras = extras;
     }
     get hasTalkback(){
-        return this._show.hasOwnProperty('talkback');
+        return this._premiumDelegate.hasTalkback;
     }
     get basePrice(){
         return Math.round(super.basePrice + this._extras.premiumFee);
@@ -43,13 +41,14 @@ class PremiumBooking extends Booking{
         return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
     }
 }
-//위임 클래스 만들기
+//위임 클래스
 class PremiumBookingDelegate{
     constructor(hostBooking, extras){
-        //서브클래스는 super 키워드로 부모 클래스 멤버에 쉽게 접근할 수 있지만,
-        //위임에선 역참조가 필수다.
         this._host = hostBooking;
         this._extras =extras;
+    }
+    get hasTalkback(){
+        return this._host._show.hasOwnProperty('talkback');
     }
 }
 
