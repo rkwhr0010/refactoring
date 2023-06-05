@@ -7,14 +7,16 @@ function createPremiumBooking(show, date, extras){
     return result;
 }
 
-
 class Booking{
     constructor(show, date){
         this._show = show;
         this._date = date;
     }
+    //위임 사용 로직 반영
     get hasTalkback(){
-        return this._show.hasOwnProperty('talkback') && !this.isPeakDay;
+        return (this._premiumDelegate) 
+            ? this._premiumDelegate.hasTalkback 
+            : this._show.hasOwnProperty('talkback') && !this.isPeakDay;
     }
     get basePrice(){
         let result = this._show.price;
@@ -31,10 +33,6 @@ class PremiumBooking extends Booking{
         super(show, date);
         this._extras = extras;
     }
-    /* 위임 메서드가 잘 동작하면, 이제 제거
-    get hasTalkback(){
-        return this._premiumDelegate.hasTalkback;
-    }*/
     get basePrice(){
         return Math.round(super.basePrice + this._extras.premiumFee);
     }
