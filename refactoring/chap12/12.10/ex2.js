@@ -19,7 +19,7 @@ class Bird{
             case "아프리카 제비" :
                 return new AfricanSwallowDelegate(data);
             case '노르웨이 제비' :
-                return new NorwegianBlueParrotDelegate(data);
+                return new NorwegianBlueParrotDelegate(data,this);
             default: return null;
         }
     }
