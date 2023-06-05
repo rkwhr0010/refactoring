@@ -17,18 +17,16 @@ class Booking{
             ? this._premiumDelegate.hasTalkback 
             : this._show.hasOwnProperty('talkback') && !this.isPeakDay;
     }
-    //해결방안 1
-    //슈퍼 클래스의 계산 로직을 함수로 추출, 가격 계산과 분배 로직 분리
+    //해결방안 2
+    // 위임 메서드를 기반 메서드의 확장 형태로 재호출
     get basePrice(){
-        return (this._premiumDelegate)
-            ? this._premiumDelegate.basePrice
-            : this._privateBasePrice;
-    }
-    get _privateBasePrice(){
         let result = this._show.price;
         if(this.isPeakDay) result += Math.round(result * 0.15);
-        return result;
+        return (this._premiumDelegate)
+            ? this._premiumDelegate.extendBasePrice(result)
+            : result;
     }
+    
     _bePremium(extras){
         this._premiumDelegate = new PremiumBookingDelegate(this, extras);
     }
@@ -55,8 +53,8 @@ class PremiumBookingDelegate{
     get hasTalkback(){
         return this._host._show.hasOwnProperty('talkback');
     }
-    get basePrice(){
-        return Math.round(super.basePrice + this._extras.premiumFee);
+    extendBasePrice(base){
+        return Math.round(base + this._extras.premiumFee);
     }
 }
 
