@@ -1,9 +1,5 @@
 function createBird(data){
-    switch(data.type){
-        case '노르웨이 제비' :
-            return new NorwegianBlueParrot(data);
-        default : return new Bird(data);
-    }
+    return new Bird(data);
 }
 class Bird{
     constructor(data){
@@ -14,55 +10,50 @@ class Bird{
     selectSpeciesDelegate(data){
         switch(data.type){
             case "유럽 제비" :
-                return new EuropeanSwallowDelegate(this);
+                return new EuropeanSwallowDelegate(data, this);
             case "아프리카 제비" :
                 return new AfricanSwallowDelegate(data,this);
             case '노르웨이 제비' :
                 return new NorwegianBlueParrotDelegate(data,this);
-            default: return null;
+            default: return new SpeciesDelegate(data, this);
         }
     }
     get name(){return this._name;}
-
-    //NorwegianBlueParrotDelegate만 특별 취급해보기
-    get plumage(){
-        if(this._speciesDelegate) 
-            return this._speciesDelegate.plumage;
-        else 
-            return this._plumage || "보통이다";
-    }
-
+    get plumage(){return this._speciesDelegate.plumage; }
     get airSpeedVelocity(){
         return (this._speciesDelegate)
             ? this._speciesDelegate.airSpeedVelocity
             : null;
     }
 }
-//plumage() 기본 메서드가 중복된다. 그리고 역참조를 추가하는 코드도 중복된다.
-class EuropeanSwallowDelegate{
-    constructor(bird){
+class SpeciesDelegate{
+    constructor(data, bird){
         this._bird = bird;
     }
-    get airSpeedVelocity(){return 35;}
     get plumage(){
         return this._bird._plumage || "예쁘다";
     }
+    airSpeedVelocity(){return null;}
 }
-class AfricanSwallowDelegate{
+class EuropeanSwallowDelegate extends SpeciesDelegate{
     constructor(data,bird){
+        super(data, bird);
+    }
+    get airSpeedVelocity(){return 35;}
+}
+class AfricanSwallowDelegate extends SpeciesDelegate{
+    constructor(data,bird){
+        super(data, bird);
         this._bird = bird;
         this._numberOfCoconuts = data._numberOfCoconuts;
     }
     get airSpeedVelocity(){
         return 40 - 2 * this._numberOfCoconuts;
     }
-    get plumage(){
-        return this._bird._plumage || "예쁘다";
-    }
 }
-class NorwegianBlueParrotDelegate{
+class NorwegianBlueParrotDelegate extends SpeciesDelegate{
     constructor(data, bird){
-        this._bird = bird;
+        super(data,bird);
         this._voltage = data.voltage;
         this._isNailed = data.isNailed;
     }
@@ -72,18 +63,5 @@ class NorwegianBlueParrotDelegate{
     get plumage(){
         if(this._voltage>100) return "그을렸다";
         else return this._bird._plumage || "예쁘다";
-    }
-}
-class NorwegianBlueParrot extends Bird{
-    constructor(data){
-        super(data);
-        this._voltage = data.voltage;
-        this._isNailed = data.isNailed;
-    }
-    get plumage(){
-        return this._speciesDelegate.plumage;
-    }
-    get airSpeedVelocity(){
-        return this._speciesDelegate.airSpeedVelocity;
     }
 }
