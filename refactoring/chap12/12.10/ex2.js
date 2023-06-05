@@ -18,6 +18,8 @@ class Bird{
         switch(data.type){
             case "유럽 제비" :
                 return new EuropeanSwallowDelegate();
+            case "아프리카 제비" :
+                return new AfricanSwallowDelegate();
             default: return null;
         }
     }
@@ -31,6 +33,12 @@ class Bird{
 }
 class EuropeanSwallowDelegate{
     get airSpeedVelocity(){return 35;}
+}
+//아프리카 제비 클래스 위임 처리
+class AfricanSwallowDelegate{
+    constructor(data){
+        this._numberOfCoconuts = data._numberOfCoconuts;
+    }
 }
 class AfricanSwallow extends Bird{
     constructor(data){
