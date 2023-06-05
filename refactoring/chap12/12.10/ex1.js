@@ -17,8 +17,6 @@ class Booking{
             ? this._premiumDelegate.hasTalkback 
             : this._show.hasOwnProperty('talkback') && !this.isPeakDay;
     }
-    //해결방안 2
-    // 위임 메서드를 기반 메서드의 확장 형태로 재호출
     get basePrice(){
         let result = this._show.price;
         if(this.isPeakDay) result += Math.round(result * 0.15);
@@ -30,18 +28,17 @@ class Booking{
     _bePremium(extras){
         this._premiumDelegate = new PremiumBookingDelegate(this, extras);
     }
+    get hasDinner(){
+        return (this._premiumDelegate)
+            ? this._premiumDelegate.hasDinner
+            : undefined;
+    }
 }
 
 class PremiumBooking extends Booking{
     constructor(show, date, extras){
         super(show, date);
         this._extras = extras;
-    }
-    get basePrice(){
-        return Math.round(super.basePrice + this._extras.premiumFee);
-    }
-    get hasDinner(){
-        return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
     }
 }
 //위임 클래스
@@ -55,6 +52,9 @@ class PremiumBookingDelegate{
     }
     extendBasePrice(base){
         return Math.round(base + this._extras.premiumFee);
+    }
+    get hasDinner(){
+        return this._extras.hasOwnProperty('dinner') && !this.isPeakDay;
     }
 }
 
