@@ -25,7 +25,12 @@ class Bird{
 
     get name(){return this._name;}
     get plumage(){return this._plumage || "보통이다";}
-    get airSpeedVelocity(){return null;}
+    //분배 메서드 처리
+    get airSpeedVelocity(){
+        return (this._speciesDelegate)
+            ? this._speciesDelegate.airSpeedVelocity
+            : null;
+    }
 }
 //위임 메서드로 옮김
 class EuropeanSwallowDelegate{
