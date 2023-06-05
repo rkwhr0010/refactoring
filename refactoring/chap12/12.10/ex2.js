@@ -15,7 +15,6 @@ class Bird{
         this._plumage = data.plumage;
         this._speciesDelegate = this.selectSpeciesDelegate(data);
     }
-    //위임을 처리할 메서드 생성
     selectSpeciesDelegate(data){
         switch(data.type){
             case "유럽 제비" :
@@ -28,11 +27,12 @@ class Bird{
     get plumage(){return this._plumage || "보통이다";}
     get airSpeedVelocity(){return null;}
 }
+//위임 메서드로 옮김
 class EuropeanSwallowDelegate{
-
+    get airSpeedVelocity(){return 35;}
 }
 class EuropeanSwallow extends Bird{
-    get airSpeedVelocity(){return 35;}
+    get airSpeedVelocity(){return this._speciesDelegate.airSpeedVelocity;}
 }
 class AfricanSwallow extends Bird{
     constructor(data){
