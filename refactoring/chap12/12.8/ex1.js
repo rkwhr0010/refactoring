@@ -2,7 +2,6 @@ class Party{
     constructor(name){
         this._name = name;
     }
-    //옮긴 데이터 관련 메서드 올리기
     get name() {return this._name;}
 } 
 class Employee extends Party{
@@ -21,7 +20,8 @@ class Department extends Party{
         this._staff = staff;
     }
     get staff(){return this._staff.slice();}
-    get totalMonthlyCost(){
+    //비슷한 로직은 좀 더 추상화된 쪽 이름으로, 혹은 추상화시켜 함수선언바꾸기
+    get monthlyCost(){
         return this.staff
             .map(e=e.monthlyCost)
             .reduce((sum,cost)=>sum+cost);
@@ -29,7 +29,7 @@ class Department extends Party{
     get headCount(){
         return this.staff.length;
     }
-    get totalAnnualCost(){
-        return this.totalMonthlyCost * 12;
+    get annualCost(){
+        return this.monthlyCost * 12;
     }
 }
