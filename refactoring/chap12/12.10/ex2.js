@@ -1,7 +1,7 @@
 //아프리카 제비 클래스 제거, 관련 코드 정리
 function createBird(data){
     switch(data.type){
-        case '유럽 제비' :
+        case '노르웨이 제비' :
             return new NorwegianBlueParrot(data);
         default : return new Bird(data);
     }
@@ -18,6 +18,8 @@ class Bird{
                 return new EuropeanSwallowDelegate();
             case "아프리카 제비" :
                 return new AfricanSwallowDelegate();
+            case '유럽 제비' :
+        return new NorwegianBlueParrot(data);
             default: return null;
         }
     }
