@@ -8,10 +8,11 @@ class CatalogItem{
     get title(){return this._title;}
     hasTag(arg){return this._tags.includes(arg);}
 }
-//오래된 스크롤에 정기 세척 이력 필요해 만듦
 class Scroll extends CatalogItem{
     constructor(id, title, tags, dateLastCleaned){
         super(id, title, tags);
+        //슈퍼 클래스 참조를 하나 만들고 슈퍼클래스를 생성한다.
+        this._catalogItem = new CatalogItem(id, title, tags);
         this._lastCleaned = dateLastCleaned;
     }
     needsCleaning(targetDate){
