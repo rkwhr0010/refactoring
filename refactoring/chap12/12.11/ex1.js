@@ -9,7 +9,7 @@ class CatalogItem{
     hasTag(arg){return this._tags.includes(arg);}
 }
 class Scroll{//먼저 적절한 저장소 찾기 또는 만들기, 여기선 적절한 저장소가 있다고 가정(catalog)
-    constructor(id, title, tags, dateLastCleaned,catalogID, catalog){
+    constructor(id, dateLastCleaned,catalogID, catalog){
         this._id = id;
         this._catalogItem = catalog.get(catalogID);
         this._lastCleaned = dateLastCleaned;
@@ -29,8 +29,6 @@ class Scroll{//먼저 적절한 저장소 찾기 또는 만들기, 여기선 적
 //스크롤 데이터 읽는 부분 코드
 const scrolls = aDocument
     .map(record => new Scroll(record.id,
-                                record.catalogData.title,
-                                record.catalogData.tags,
                                 LocalDate.parse(record.lastCleaned),
                                 record.catalogData.id,
                                 catalog ));
