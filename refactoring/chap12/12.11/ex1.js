@@ -8,10 +8,10 @@ class CatalogItem{
     get title(){return this._title;}
     hasTag(arg){return this._tags.includes(arg);}
 }
-class Scroll{
-    constructor(id, title, tags, dateLastCleaned){
-        this._id = id;//먼저 id를 내 속성으로 만들기
-        this._catalogItem = new CatalogItem(null, title, tags);
+class Scroll{//먼저 적절한 저장소 찾기 또는 만들기, 여기선 적절한 저장소가 있다고 가정(catalog)
+    constructor(id, title, tags, dateLastCleaned,catalogID, catalog){
+        this._id = id;
+        this._catalogItem = catalog.get(catalogID);
         this._lastCleaned = dateLastCleaned;
     }
     get id(){return this._id;}
@@ -31,4 +31,6 @@ const scrolls = aDocument
     .map(record => new Scroll(record.id,
                                 record.catalogData.title,
                                 record.catalogData.tags,
-                                LocalDate.parse(record.lastCleaned)));
+                                LocalDate.parse(record.lastCleaned),
+                                record.catalogData.id,
+                                catalog ));
