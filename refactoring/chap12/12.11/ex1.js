@@ -25,3 +25,10 @@ class Scroll{
         return this._lastCleaned.until(targetDate, ChronoUnit.DAYS);
     }
 }
+
+//스크롤 데이터 읽는 부분 코드
+const scrolls = aDocument
+    .map(record => new Scroll(record.id,
+                                record.catalogData.title,
+                                record.catalogData.tags,
+                                LocalDate.parse(record.lastCleaned)));
